@@ -16,7 +16,6 @@ uploaded_files = st.file_uploader("Choose 2 CSV file containing, 1) the Score Ke
 
 # Process the uploaded files
 for i in range(len(uploaded_files)):
-	print(i)
-	# if uploaded_file is not None:
-	# 	dataframe = pd.read_csv(uploaded_file)
-	#	st.write(dataframe)
+	if uploaded_files[i] is not None:
+	 	dataframe + str(i) = pd.read_csv(uploaded_files[i])
+		st.write(dataframe + str(i))
