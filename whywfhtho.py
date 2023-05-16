@@ -7,7 +7,6 @@ import streamlit as st
 If you have any questions... 
 
 """
-one
 
 # Upload the first CSV file
 st.header("Upload both CSV files: 1) ScoreKey 2) Survey Results")
