@@ -11,8 +11,14 @@ If you have any questions...
 
 """
 
-uploaded_file = st.file_uploader("Upload your file here...", type=['csv'])
+upload1 = st.file_uploader("Upload your file here...", type=['csv'])
 
-if uploaded_file is not None:
-	dataframe = pd.read_csv(uploaded_file)
-	st.write(dataframe)
+if upload1 is not None:
+	ScoreKey = pd.read_csv(upload1)
+	st.write(ScoreKey)
+	
+upload2 = st.file_uploader("Upload your file here...", type=['csv'])
+
+if upload2 is not None:
+	SurveyResults = pd.read_csv(upload2)
+	st.write(SurveyResults)
