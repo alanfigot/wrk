@@ -9,8 +9,8 @@ If you have any questions...
 """
 
 # Upload the first CSV file
-st.header("Upload both CSV files: 1) ScoreKey 2) Survey Results")
-uploaded_files = st.file_uploader("Choose a CSV file", type="csv", accept_multiple_files=True)
+st.header("Upload files")
+uploaded_files = st.file_uploader("Choose 2 CSV file containing, 1) Score Key, and 2) Survey Results", type="csv", accept_multiple_files=True)
 
 # Process the uploaded files
 for uploaded_file in uploaded_files:
