@@ -36,10 +36,12 @@ if 'key' in locals() and 'results' not in locals():
 elif 'results' in locals() and 'key' not in locals():
         st.subheader(':blue[_Survey Responses_]')
         st.write(results)
+	st.write("Please upload Survey Score Key"
 
 elif 'results' and 'key' in locals():
-	st.subheader(':blue[_Score Key_]')
+	st.subheader(':blue[_Score Score Key_]')
 	st.write(key)
+	st.write("Please upload Survey Responses"
 	
 	st.subheader(':blue[_Survey Responses_]')
 	st.write(results)
@@ -88,4 +90,4 @@ elif 'results' and 'key' in locals():
 	# st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 
 else:
-    placeholder.text("Please upload files")
+    placeholder.text("Please upload 2 necessary files")
