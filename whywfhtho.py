@@ -26,6 +26,6 @@ for uploaded_file in uploaded_files[1:2]:
 		SurveyResults = pd.read_csv(uploaded_file)
 		st.write(SurveyResults)
        
-st.line_chart(SurveyResults[1:2])
+st.line_chart(SurveyResults['X2'])
 
 
