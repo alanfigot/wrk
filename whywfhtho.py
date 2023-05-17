@@ -21,9 +21,9 @@ for uploaded_file in uploaded_files:
 	df.rename(columns=lambda x: x.strip(), inplace=True)
 	print(df.columns)
 	if any(string in df.columns for string in ['Identifier','Min','Max']):
-		key = uploaded_file
+		key = df
 	else: 
-		results = uploaded_file
+		results = df
 
 # Process the uploaded files
 st.subheader(':blue[_Score Key_]')
