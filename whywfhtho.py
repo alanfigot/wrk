@@ -52,13 +52,13 @@ if 'results' and 'key' in locals():
 	for col in ['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']:
 	    for Qid in key[key[col].str.contains(('Min|Max'))]['Identifier']:
 		if Qid in results.columns:
-		    minimum = key.loc[key['Identifier'] == Qid, 'Min'].values[0]
-		    maximum = key.loc[key['Identifier'] == Qid, 'Max'].values[0]
-		    fraction = 1 / (maximum-minimum)
-		    if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Min").any():
-			results[col] = results[col] + (1 -((results[Qid]-minimum)* fraction))
-		    if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Max").any():
-			results[col] = results[col] + ((results[Qid]-minimum)* fraction)
+			minimum = key.loc[key['Identifier'] == Qid, 'Min'].values[0]
+			maximum = key.loc[key['Identifier'] == Qid, 'Max'].values[0]
+			fraction = 1 / (maximum-minimum)
+				if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Min").any():
+					results[col] = results[col] + (1 -((results[Qid]-minimum)* fraction))
+		    		if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Max").any():
+					results[col] = results[col] + ((results[Qid]-minimum)* fraction)
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
