@@ -56,8 +56,8 @@ if 'results' and 'key' in locals():
 				maximum = key.loc[key['Identifier'] == Qid, 'Max'].values[0]
 				fraction = 1 / (maximum-minimum)
 				if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Min").any():
-					results[col] = results[col] + (1 -((results[Qid]-minimum)* fraction))
-		    		if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Max").any():
+					results[col] = results[col] + (1 -((results[Qid]-minimum)* fraction))	
+				if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Max").any():
 					results[col] = results[col] + ((results[Qid]-minimum)* fraction)
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
