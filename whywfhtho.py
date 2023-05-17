@@ -38,7 +38,7 @@ elif 'results' in locals() and 'key' not in locals():
         st.write(results, "Please upload Survey Score Key")
 
 elif 'results' and 'key' in locals():
-	st.subheader(':blue[_Score Score Key_]')
+	st.subheader(':blue[_Survey Score Key_]')
 	st.write(key)
 	
 	st.subheader(':blue[_Survey Responses_]')
