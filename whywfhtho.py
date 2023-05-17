@@ -26,8 +26,6 @@ for uploaded_file in uploaded_files[1:2]:
 		SurveyResults = pd.read_csv(uploaded_file)
 		st.write(SurveyResults)
        
-chart_data = pd.DataFrame(np.random.randn(20, 3), columns=['a', 'b', 'c'])
-
-st.line_chart(chart_data)
+st.line_chart(SurveyResults[1:2])
 
 
