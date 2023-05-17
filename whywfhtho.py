@@ -56,3 +56,14 @@ for col in ['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']:
 st.subheader(':blue[_Analysis Results_] :sunglasses:')
 st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
+st.subheader('Filters')
+# Create filter widgets
+selected_columns = st.multiselect("Select columns", results.columns)
+selected_rows = st.multiselect("Select rows", results.index)
+
+# Apply filters
+filtered_df = results[selected_columns].loc[selected_rows]
+
+# Display filtered DataFrame
+st.write(filtered_df)
+
