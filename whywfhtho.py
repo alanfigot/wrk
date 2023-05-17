@@ -10,8 +10,8 @@ import numpy as np
 placeholder = st.empty()
 
 # Upload CSV files
-st.caption("Upload CSV files")
-uploaded_files = st.file_uploader("Choose the 1) Score Key, and 2) Survey Results", type="csv", accept_multiple_files=True)
+st.subheader("Please upload the Score Key and Survey Results in CSV format")
+uploaded_files = st.file_uploader(type="csv", accept_multiple_files=True)
 
 if uploaded_files is not None and len(uploaded_files) > 2:
     st.warning("Please upload a maximum of 2 files. Only the first 2 files will be considered.")
@@ -87,4 +87,4 @@ elif 'results' and 'key' in locals():
 	# st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 
 else:
-    placeholder.text("Please upload 2 necessary files")
+    placeholder.text("Please upload necessary files")
