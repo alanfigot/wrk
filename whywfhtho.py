@@ -10,8 +10,8 @@ import numpy as np
 placeholder = st.empty()
 
 # Upload CSV files
-st.subheader("Please upload the Score Key and Survey Results in CSV format")
-uploaded_files = st.file_uploader("Upload CSV files...", type="csv", accept_multiple_files=True)
+st.subheader("Upload a Score Key and Survey Results")
+uploaded_files = st.file_uploader("Files must be in CSV format...", type="csv", accept_multiple_files=True)
 
 if uploaded_files is not None and len(uploaded_files) > 2:
     st.warning("Please upload a maximum of 2 files. Only the first 2 files will be considered.")
