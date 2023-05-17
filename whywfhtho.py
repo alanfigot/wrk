@@ -19,6 +19,7 @@ if uploaded_files is not None and len(uploaded_files) > 2:
 for uploaded_file in uploaded_files:
 	df = pd.read_csv(uploaded_file)
 	df = df.rename(columns=lambda x: x.strip(), inplace=True)
+	print(df.columns)
 	if any(string in df.columns for string in ['Identifier','Min','Max']):
 		key = uploaded_file
 	else: 
