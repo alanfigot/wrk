@@ -83,3 +83,5 @@ if 'results' and 'key' in locals():
 	# Display the grouped DataFrame
 	st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 
+else:
+    placeholder.text("Please upload files")
