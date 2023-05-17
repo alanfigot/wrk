@@ -12,6 +12,8 @@ If you have any questions...
 st.header("Upload CSV files")
 uploaded_files = st.file_uploader("Choose the 1) Score Key, and 2) Survey Results", type="csv", accept_multiple_files=True)
 
+placeholder = st.empty()
+
 if uploaded_files is not None and len(uploaded_files) > 2:
     st.warning("Please upload a maximum of 2 files. Only the first 2 files will be considered.")
     uploaded_files = uploaded_files[:2]
@@ -74,5 +76,5 @@ selected_column = st.selectbox("Select column for grouping", results.columns)
 grouped_df = results.groupby(selected_column).mean()
 
 # Display the grouped DataFrame
-st.write(grouped_df)
+st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 
