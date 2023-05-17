@@ -42,7 +42,7 @@ elif 'results' and 'key' in locals():
 	st.write(key)
 	
 	st.subheader(':blue[_Survey Responses_]')
-        st.write(results)
+	st.write(results)
 	
 	results = results.filter(regex='^(F|X)')
 	for i in ['Identifier','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']: 
