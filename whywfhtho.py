@@ -28,12 +28,12 @@ for uploaded_file in uploaded_files:
 		results = df
 
 # Process the uploaded files
-if 'key' in locals():
+if 'key' in locals() and 'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
 	st.write(key)
 		
 # Process the uploaded files
-elif 'results' in locals():
+elif 'results' in locals() and 'key' not in locals():
         st.subheader(':blue[_Survey Responses_]')
         st.write(results)
 
