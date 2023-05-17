@@ -32,7 +32,7 @@ for uploaded_file in uploaded_files:
 # Process the uploaded files
 if 'key' in locals():
 	st.subheader(':blue[_Score Key_]')
-        st.write(key)
+	st.write(key)
 		
 # Process the uploaded files
 if 'results' in locals():
@@ -42,7 +42,7 @@ if 'results' in locals():
 if 'results' and 'key' in locals():
 	results = results.filter(regex='^(F|X)')
 	for i in ['Identifier','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']: 
-	    key[i].fillna('', inplace=True)
+		key[i].fillna('', inplace=True)
 
 	key = key[key['Identifier'].str.startswith(('F','X'))]
 
