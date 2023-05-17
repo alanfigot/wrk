@@ -3,16 +3,14 @@ import streamlit as st
 import numpy as np
 
 """
-# Persona Development 
-## (Under Construction)  
-
+# Persona Development (Under Construction)  
 """
 
 # Create an empty placeholder
 placeholder = st.empty()
 
 # Upload CSV files
-st.header("Upload CSV files")
+st.caption("Upload CSV files")
 uploaded_files = st.file_uploader("Choose the 1) Score Key, and 2) Survey Results", type="csv", accept_multiple_files=True)
 
 if uploaded_files is not None and len(uploaded_files) > 2:
