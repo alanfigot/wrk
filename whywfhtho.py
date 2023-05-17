@@ -54,7 +54,7 @@ for col in ['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']:
                 results[col] = results[col] + ((results[Qid]-minimum)* fraction)
 
 st.subheader(':blue[_Analysis Results_] :sunglasses:')
-st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
+st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
 
 st.subheader('Filters')
 # Create filter widgets
@@ -66,4 +66,13 @@ filtered_df = results[selected_columns].loc[selected_rows]
 
 # Display filtered DataFrame
 st.write(filtered_df)
+
+# Create a selectbox widget for column selection
+selected_column = st.selectbox("Select column for grouping", results.columns)
+
+# Group the DataFrame by the selected column and calculate the average
+grouped_df = results.groupby(selected_column).mean()
+
+# Display the grouped DataFrame
+st.write(grouped_df)
 
