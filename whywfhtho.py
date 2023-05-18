@@ -3,8 +3,10 @@ import streamlit as st
 import numpy as np
 
 """
-# Persona Development (Under Construction)  
+# Persona Development  
 """
+st.title(":red[_"Under Construction_]")
+st.divider()
 
 # Create an empty placeholder
 placeholder = st.empty()
