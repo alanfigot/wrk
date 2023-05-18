@@ -28,7 +28,7 @@ for uploaded_file in uploaded_files:
 		key = df
 	else:
 		f1 = list(filter(lambda x: re.match(r'^F\d', x), df))[0]
-		if np.issubdtype(results[f1].dtype, np.number):
+		if np.issubdtype(df[f1].dtype, np.number):
 			results = df
 		else:
 			labels = df
