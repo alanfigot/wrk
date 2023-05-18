@@ -82,7 +82,7 @@ elif 'results' and 'key' in locals():
 	
 	# Group the DataFrame by the selected column and calculate the average
 	grouped_df = results.groupby(selected_column).mean()
-
+	
 	# Display the grouped DataFrame
 	st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
