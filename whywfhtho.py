@@ -27,7 +27,7 @@ for uploaded_file in uploaded_files:
 	if any(string in df.columns for string in ['Identifier','Min','Max']):
 		key = df
 	else:
-		f1 = list(filter(lambda x: re.match(r'^F\d', x), df))[0]
+		f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
 		if np.issubdtype(df[f1].dtype, np.number):
 			results = df
 		else:
