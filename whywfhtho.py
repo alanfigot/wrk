@@ -87,7 +87,7 @@ elif 'results' and 'key' in locals():
 	grouped_df = results.groupby(selected_column).mean()
 
 	# Display the grouped DataFrame
-	st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
+	st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
