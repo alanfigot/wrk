@@ -76,12 +76,9 @@ elif 'results' and 'key' in locals():
 	if 'labels' in locals():
 		for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
 			results[i] = labels[i]
-		
-		# Get a list of column names matching the pattern 'F\d' using regex
-		matching_columns = list(filter(lambda x: re.match(r'^F\d', x), results.columns))
 
 		# Create a selectbox widget for column selection
-		selected_column = st.selectbox("Select column for grouping",  matching_columns)
+		selected_column = st.selectbox("Select column for grouping",  results[list(filter(lambda x: re.match(r'^F\d', x), results.columns))])
 		
 		# Group the DataFrame by the selected column and calculate the average
 		grouped_df = results.groupby(selected_column).mean()
