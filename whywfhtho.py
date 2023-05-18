@@ -82,12 +82,12 @@ elif 'results' and 'key' in locals():
 
 		# Create a selectbox widget for column selection
 		selected_column = st.selectbox("Select column for grouping",  matching_columns)
-		st.write(str(selected_columns))
+		
 		# Group the DataFrame by the selected column and calculate the average
-		# grouped_df = results.groupby(selected_column).mean()
+		grouped_df = results.groupby(selected_column).mean()
 
 		# Display the grouped DataFrame
-		# st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
+		st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
