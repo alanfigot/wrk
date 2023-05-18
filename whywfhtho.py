@@ -1,6 +1,7 @@
 import pandas as pd
 import streamlit as st
 import numpy as np
+import re 
 
 """
 # Persona Development  
@@ -80,13 +81,13 @@ elif 'results' and 'key' in locals():
 	# st.write(filtered_df)
 
 	# Create a selectbox widget for column selection
-	# selected_column = st.selectbox("Select column for grouping", results.columns)
+	selected_column = st.selectbox("Select column for grouping",  list(filter(lambda x: re.match(r'^F\d', x), results)))
 
 	# Group the DataFrame by the selected column and calculate the average
-	# grouped_df = results.groupby(selected_column).mean()
+	grouped_df = results.groupby(selected_column).mean()
 
 	# Display the grouped DataFrame
-	# st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
+	st.write(grouped_df['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 
 else:
     placeholder.text("Please upload the necessary files")
