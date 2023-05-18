@@ -5,7 +5,7 @@ import numpy as np
 """
 # Persona Development  
 """
-st.title(":red[_"Under Construction_]")
+st.title(":red[_Under Construction_]")
 st.divider()
 
 # Create an empty placeholder
