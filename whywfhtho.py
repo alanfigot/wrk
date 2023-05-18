@@ -73,7 +73,7 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
 
-	if 'labels' in locals():
+	# if 'labels' in locals():
 		# for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
 		#	results[i] = labels[i]
 
