@@ -78,7 +78,7 @@ elif 'results' and 'key' in locals():
 			results[i] = labels[i]
 
 		# Create a selectbox widget for column selection
-		selected_column = st.selectbox("Select column for grouping",  results[list(filter(lambda x: re.match(r'^F\d', x), results.columns))])
+		selected_column = st.selectbox("Select column for grouping", results.columns)
 		
 		# Group the DataFrame by the selected column and calculate the average
 		grouped_df = results.groupby(selected_column).mean()
