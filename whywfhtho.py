@@ -88,19 +88,6 @@ elif 'results' and 'key' in locals():
 
 		# Display the grouped DataFrame
 		st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
-	
-	
-	for i in list(filter(lambda x: re.match(r'^F\d', x), labels)):
-		results[i] = labels[i]
-
-	# Display a download button
-	def download_csv(df):
-	    csv = df.to_csv(index=False)
-	    b64 = base64.b64encode(csv.encode()).decode()
-	    href = f'<a href="data:file/csv;base64,{b64}" download="data.csv">Download CSV file</a>'
-	    return href
-
-	st.markdown(download_csv(results), unsafe_allow_html=True)
 
 else:
     placeholder.text("Please upload the necessary files")
