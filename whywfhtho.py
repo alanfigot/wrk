@@ -74,8 +74,8 @@ elif 'results' and 'key' in locals():
 	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
 
 	if 'labels' in locals():
-		for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
-			results[i] = labels[i]
+		# for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
+		#	results[i] = labels[i]
 
 		# Create a selectbox widget for column selection
 		selected_column = st.selectbox("Select column for grouping", results.columns)
