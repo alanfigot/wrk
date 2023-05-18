@@ -73,18 +73,21 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
 
-	# if 'labels' in locals():
-		# for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
-		#	results[i] = labels[i]
 
 	# Create a selectbox widget for column selection
 	selected_column = st.selectbox("Select column for grouping", results.columns)
 	
-	# Group the DataFrame by the selected column and calculate the average
-	grouped_df = results.groupby(selected_column).mean()
-	
-	# Display the grouped DataFrame
-	st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
+	if 'labels' in locals():
+		if len(results[selected_column].unique()) == len(labels[selected_column].unique()):
+			tag = {results[selected_column].unique()[i]: labels[selected_column].unique()[i] for i in range(len(results[selected_column].unique()))}
+			
+			st.write(results.groupby('F1').mean()[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].rename(index=tag))
+	else: 
+		# Group the DataFrame by the selected column and calculate the average
+		grouped_df = results.groupby(selected_column).mean()
+
+		# Display the grouped DataFrame
+		st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
