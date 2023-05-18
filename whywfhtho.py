@@ -26,6 +26,8 @@ for uploaded_file in uploaded_files:
 	print(df.columns)
 	if any(string in df.columns for string in ['Identifier','Min','Max']):
 		key = df
+	# elif:
+		# df[list(filter(lambda x: re.match(r'^F\d', x), df))[0]].dtype
 	else: 
 		results = df
 
