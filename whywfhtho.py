@@ -16,9 +16,9 @@ placeholder = st.empty()
 st.subheader("Upload a Score Key and Survey Results")
 uploaded_files = st.file_uploader("Files must be in CSV format...", type="csv", accept_multiple_files=True)
 
-if uploaded_files is not None and len(uploaded_files) > 2:
-    st.warning("Please upload a maximum of 2 files. Only the first 2 files will be considered.")
-    uploaded_files = uploaded_files[:2]
+if uploaded_files is not None and len(uploaded_files) > 3:
+    st.warning("Please upload a maximum of 3 files. Only the first 3 files will be considered.")
+    uploaded_files = uploaded_files[:3]
 	
 for uploaded_file in uploaded_files:
 	df = pd.read_csv(uploaded_file)
@@ -26,10 +26,12 @@ for uploaded_file in uploaded_files:
 	print(df.columns)
 	if any(string in df.columns for string in ['Identifier','Min','Max']):
 		key = df
-	# elif:
-		# df[list(filter(lambda x: re.match(r'^F\d', x), df))[0]].dtype
-	else: 
-		results = df
+	else:
+		f1 = list(filter(lambda x: re.match(r'^F\d', x), df))[0]
+		if np.issubdtype(results[f1].dtype, np.number):
+			results = df
+		else:
+			labels = df
 
 # Process the uploaded files
 if 'key' in locals() and 'results' not in locals():
@@ -71,25 +73,18 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
 
-	# st.subheader('Filters')
-	# Create filter widgets
-	# selected_columns = st.multiselect("Select columns", results.columns)
-	# selected_rows = st.multiselect("Select rows", results.index)
+	if 'labels' in locals():
+		for i in list(filter(lambda x: re.match(r'^F\d', x), labels)): 
+			results[i] = labels[i]
+			
+		# Create a selectbox widget for column selection
+		selected_column = st.selectbox("Select column for grouping",  list(filter(lambda x: re.match(r'^F\d', x), results)))
 
-	# Apply filters
-	# filtered_df = results[selected_columns].loc[selected_rows]
+		# Group the DataFrame by the selected column and calculate the average
+		grouped_df = results.groupby(selected_column).mean()
 
-	# Display filtered DataFrame
-	# st.write(filtered_df)
-
-	# Create a selectbox widget for column selection
-	selected_column = st.selectbox("Select column for grouping",  list(filter(lambda x: re.match(r'^F\d', x), results)))
-
-	# Group the DataFrame by the selected column and calculate the average
-	grouped_df = results.groupby(selected_column).mean()
-
-	# Display the grouped DataFrame
-	st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
+		# Display the grouped DataFrame
+		st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
