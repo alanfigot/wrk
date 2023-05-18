@@ -81,7 +81,7 @@ elif 'results' and 'key' in locals():
 		if len(results[selected_column].unique()) == len(labels[selected_column].unique()):
 			tag = {results[selected_column].unique()[i]: labels[selected_column].unique()[i] for i in range(len(results[selected_column].unique()))}
 			
-			st.write(results.groupby('F1').mean()[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].rename(index=tag))
+			st.write(results.groupby(selected_column).mean()[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].rename(index=tag))
 	else: 
 		# Group the DataFrame by the selected column and calculate the average
 		grouped_df = results.groupby(selected_column).mean()
