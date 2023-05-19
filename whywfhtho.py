@@ -112,6 +112,7 @@ elif 'results' and 'key' in locals():
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
+	max_out.replace(None, np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
 	
 	st.write(max_out)
