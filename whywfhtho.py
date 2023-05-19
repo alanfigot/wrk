@@ -187,12 +187,17 @@ elif 'results' and 'key' in locals():
 	
 	# Download Options
 	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
-	if selected_file == 'Individual Scores':
-		st.download_button(
-			label = "Download Individual Scores", 
-			data = totals.to_csv().encode('utf-8'), 
-			file_name= "totals.csv",
-			mime="text/csv",
-			key='download-csv')
+	download_df = totals
+	btn =  "Download Individual Scores"
+	if selected_file == 'Group Scores':
+		download_df = filtered_results
+		btn =  f"Download {selected_filter} Scores" 
+	
+	st.download_button(
+		label = btn, 
+		data = download_df.to_csv().encode('utf-8'), 
+		file_name= "totals.csv",
+		mime="text/csv",
+		key='download-csv')
 else:
     placeholder.text("Please upload the necessary files")
