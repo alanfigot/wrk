@@ -109,11 +109,14 @@ elif 'results' and 'key' in locals():
 			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
 	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
-	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
+	
+	st.write(max_out)
+	
+	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	
 	valid_columns = key['Identifier'].unique()
 
