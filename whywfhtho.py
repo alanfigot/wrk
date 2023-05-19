@@ -169,7 +169,7 @@ elif 'results' and 'key' in locals():
 	# else: 
 	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) != '']
 		
-		selected_filter = st.selectbox("Select column for grouping", filters)
+		selected_filter = st.selectbox("Select filter for grouping", filters)
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
 		
 		filtered_results = results.join(totals).groupby(selected_filter_id).mean()
