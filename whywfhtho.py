@@ -145,6 +145,8 @@ elif 'results' and 'key' in locals():
 	
 	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	
+	st.write(max_totals)
+	
 	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
     		totals[col] = totals[col] / max_totals[col][col]
 
