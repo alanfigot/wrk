@@ -119,30 +119,27 @@ elif 'results' and 'key' in locals():
 	for dimension in max_totals.columns:
 	    temp_results = max_out.copy()
 	    for col in temp_results.columns:
-		if col in valid_columns:
-		    key_match = key.loc[key['Identifier'] == col]
-		    if not key_match.empty:
-			minimum = key_match['Min'].values[0]
-			maximum = key_match['Max'].values[0]
-
-			if minimum != maximum and maximum > minimum:
-			    fraction = 1 / (maximum - minimum)
+			if col in valid_columns:
+				key_match = key.loc[key['Identifier'] == col]
+				if not key_match.empty:
+					minimum = key_match['Min'].values[0]
+					maximum = key_match['Max'].values[0]
+					if minimum != maximum and maximum > minimum:
+						fraction = 1 / (maximum - minimum)
+					else:
+						fraction = 0
+				if key.loc[key['Identifier'] == col, dimension].values[0] == 'Min':
+					temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
+					temp_results[col] = temp_results[col].apply(lambda x: (1 -( (x - minimum) * fraction)))
+				elif key.loc[key['Identifier'] == col, dimension].values[0] == 'Max':
+					temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
+					temp_results[col] = temp_results[col].apply(lambda x: ( (x - minimum) * fraction))
+				else:
+					temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 			else:
-			    fraction = 0
+				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 
-		    if key.loc[key['Identifier'] == col, dimension].values[0] == 'Min':
-			temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
-			temp_results[col] = temp_results[col].apply(lambda x: (1 -( (x - minimum) * fraction)))
-
-		    elif key.loc[key['Identifier'] == col, dimension].values[0] == 'Max':
-			temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
-			temp_results[col] = temp_results[col].apply(lambda x: ( (x - minimum) * fraction))
-		    else:
-			temp_results[col] = temp_results[col].apply(lambda x: x * 0)
-		else:
-		    temp_results[col] = temp_results[col].apply(lambda x: x * 0)
-
-	    max_totals[dimension] = temp_results.sum(axis=1)
+				max_totals[dimension] = temp_results.sum(axis=1)
 	
 	max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	
