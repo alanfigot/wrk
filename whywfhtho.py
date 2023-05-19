@@ -69,7 +69,7 @@ elif 'results' and 'key' in locals():
 	st.write(results)
 	
 	# Create new columns for scores 
-	totals = pd.DataFrame(index=list(results.index), columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
+	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	# len(results.index)
 	
 	# Calculate Scores 
@@ -107,7 +107,7 @@ elif 'results' and 'key' in locals():
 			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
 	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
-	max_totals = pd.DataFrame(columns={'IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'})
+	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
