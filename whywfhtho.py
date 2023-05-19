@@ -170,9 +170,11 @@ elif 'results' and 'key' in locals():
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
 	
 		if 'labels' in locals():
-			filtered_results = labels.join(totals).groupby(selected_filter_id).mean()
-			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
+			# filtered_results = labels.join(totals).groupby(selected_filter_id).mean()
+			#st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
+			st.write('Hello')
 		else: 
-			pass
+			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
+			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
 else:
     placeholder.text("Please upload the necessary files")
