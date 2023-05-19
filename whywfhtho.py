@@ -166,15 +166,21 @@ elif 'results' and 'key' in locals():
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
+	# else: 
+	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) != '']
+		
 		selected_filter = st.selectbox("Select column for grouping", filters)
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
+		
+		filtered_results = results.join(totals).groupby(selected_filter_id).mean()
 	
 		if 'labels' in locals():
-			# filtered_results = labels.join(totals).groupby(selected_filter_id).mean()
-			#st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
-			st.write('Hello')
+			tags = {}
+			if len(labels[filt].unique()) == len(results[filt].unique()):
+				for i in range(len(labels[filt].unique())):
+					tags[results[filt].unique()[i]] = labels[filt].unique()[i].strip()
+			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].rename(index=tags).style.format("{:.2}"))
 		else: 
-			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
 else:
     placeholder.text("Please upload the necessary files")
