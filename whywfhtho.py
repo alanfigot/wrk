@@ -179,9 +179,11 @@ elif 'results' and 'key' in locals():
 			if len(labels[selected_filter_id].unique()) == len(results[selected_filter_id].unique()):
 				for i in range(len(labels[selected_filter_id].unique())):
 					tags[results[selected_filter_id].unique()[i]] = labels[selected_filter_id].unique()[i].strip()
-			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].rename(index=tags).style.format("{:.2}"))
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].rename(index=tags)
+			st.write(filtered_results.style.format("{:.2}"))
 		else: 
-			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
+			st.write(filtered_results.style.format("{:.2}"))
 	
 	# Download Options
 	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
