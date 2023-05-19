@@ -157,7 +157,7 @@ elif 'results' and 'key' in locals():
 			else:
 				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 
-				max_totals[dimension] = temp_results.sum(axis=1)
+		max_totals[dimension] = temp_results.sum(axis=1)
 	
 	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	
