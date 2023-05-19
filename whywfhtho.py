@@ -167,11 +167,12 @@ elif 'results' and 'key' in locals():
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
 		selected_filter = st.selectbox("Select column for grouping", filters)
+		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
 	
 		if 'labels' in locals():
-			st.write(labels.join(totals).groupby(selected_filter).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
+			st.write(labels.join(totals).groupby(selected_filter_id).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
 		else: 
-			st.write(results.join(totals).groupby(selected_filter).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
+			st.write(results.join(totals).groupby(selected_filter_id).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
