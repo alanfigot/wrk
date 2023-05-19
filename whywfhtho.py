@@ -76,8 +76,8 @@ elif 'results' and 'key' in locals():
 	valid_columns = key['Identifier'].unique()
 
 	for dimension in totals.columns:
-	    temp_results = results.copy()
-	    for col in temp_results.columns:
+		temp_results = results.copy()
+		for col in temp_results.columns:
 			if col in valid_columns:
 		    		key_match = key.loc[key['Identifier'] == col]
 				if not key_match.empty:
