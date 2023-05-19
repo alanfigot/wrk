@@ -115,11 +115,11 @@ elif 'results' and 'key' in locals():
 	# Convert columns to numeric, dropping the ones that cannot be converted
 	numeric_columns = []
 	for column in max_out.columns:
-	    try:
-		max_out[column] = pd.to_numeric(max_out[column])
-		numeric_columns.append(column)
-	    except ValueError:
-		pass
+		try:
+			max_out[column] = pd.to_numeric(max_out[column])
+			numeric_columns.append(column)
+	    	except ValueError:
+			pass
 
 	# Create a new DataFrame with the numeric columns
 	max_out = max_out[numeric_columns]
