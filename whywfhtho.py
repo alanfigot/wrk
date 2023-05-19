@@ -184,7 +184,8 @@ elif 'results' and 'key' in locals():
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
 	
 	# Download Options
-	selected_filter = st.selectbox("Select filter for grouping", ['scores','filtered scores'])
-	st.download_button("Download",csv,"file.csv","text/csv",key='download-csv')
+	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
+	if selected_file == 'Individual Scores':
+		st.download_button("Download Individual Scores",totals,"totals.csv","text/csv",key='download-csv')
 else:
     placeholder.text("Please upload the necessary files")
