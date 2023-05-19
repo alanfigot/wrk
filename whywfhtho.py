@@ -182,5 +182,9 @@ elif 'results' and 'key' in locals():
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].rename(index=tags).style.format("{:.2}"))
 		else: 
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
+	
+	# Download Options
+	selected_filter = st.selectbox("Select filter for grouping", ['scores','filtered scores'])
+	st.download_button("Download",csv,"file.csv","text/csv",key='download-csv')
 else:
     placeholder.text("Please upload the necessary files")
