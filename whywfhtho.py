@@ -188,8 +188,8 @@ elif 'results' and 'key' in locals():
 	if selected_file == 'Individual Scores':
 		st.download_button(
 			label = "Download Individual Scores", 
-			data = totals, 
-			file_name="totals.csv",
+			data = totals.to_csv().encode('utf-8'), 
+			file_name= "totals.csv",
 			mime="text/csv",
 			key='download-csv')
 else:
