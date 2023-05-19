@@ -79,7 +79,7 @@ elif 'results' and 'key' in locals():
 		temp_results = results.copy()
 		for col in temp_results.columns:
 			if col in valid_columns:
-		    		key_match = key.loc[key['Identifier'] == col]
+				key_match = key.loc[key['Identifier'] == col]
 				if not key_match.empty:
 					minimum = key_match['Min'].values[0]
 					maximum = key_match['Max'].values[0]
