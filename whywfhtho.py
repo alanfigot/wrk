@@ -191,7 +191,7 @@ elif 'results' and 'key' in locals():
 	btn =  "Download Individual Scores"
 	if selected_file == 'Group Scores':
 		download_df = filtered_results
-		btn =  f"Download {selected_filter} Scores" 
+		btn =  f"Download Scores by {selected_filter}" 
 	
 	st.download_button(
 		label = btn, 
