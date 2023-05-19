@@ -118,7 +118,7 @@ elif 'results' and 'key' in locals():
 		try:
 			max_out[column] = pd.to_numeric(max_out[column])
 			numeric_columns.append(column)
-	    	except ValueError:
+		except ValueError:
 			pass
 
 	# Create a new DataFrame with the numeric columns
