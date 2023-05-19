@@ -57,11 +57,11 @@ elif 'results' and 'key' in locals():
 	# Convert columns to numeric, dropping the ones that cannot be converted
 	numeric_columns = []
 	for column in results.columns:
-	    try:
-		results[column] = pd.to_numeric(results[column])
-		numeric_columns.append(column)
-	    except ValueError:
-		pass
+		try:
+			results[column] = pd.to_numeric(results[column])
+			numeric_columns.append(column)
+		except ValueError:
+			pass
 
 	# Create a new DataFrame with the numeric columns
 	results = results[numeric_columns]
