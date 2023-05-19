@@ -117,8 +117,8 @@ elif 'results' and 'key' in locals():
 
 	# Calculate Max Score 
 	for dimension in max_totals.columns:
-	    temp_results = max_out.copy()
-	    for col in temp_results.columns:
+		temp_results = max_out.copy()
+		for col in temp_results.columns:
 			if col in valid_columns:
 				key_match = key.loc[key['Identifier'] == col]
 				if not key_match.empty:
