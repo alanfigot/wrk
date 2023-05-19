@@ -111,6 +111,19 @@ elif 'results' and 'key' in locals():
 	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
+	
+	# Convert columns to numeric, dropping the ones that cannot be converted
+	numeric_columns = []
+	for column in max_out.columns:
+	    try:
+		max_out[column] = pd.to_numeric(max_out[column])
+		numeric_columns.append(column)
+	    except ValueError:
+		pass
+
+	# Create a new DataFrame with the numeric columns
+	max_out = max_out[numeric_columns]
+	
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
 	
