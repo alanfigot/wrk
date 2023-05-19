@@ -164,7 +164,8 @@ elif 'results' and 'key' in locals():
 	st.write(max_totals)
 	
 	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
-    		totals[col] = totals[col] / max_totals[col][col]
+		max_score = max_totals[col][col]
+		totals[col] = totals[col].apply(lambda x: x / max_score)
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals)
