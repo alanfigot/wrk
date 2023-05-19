@@ -65,8 +65,6 @@ elif 'results' and 'key' in locals():
 
 	# Create a new DataFrame with the numeric columns
 	results = results[numeric_columns]
-	# Write
-	st.write(results)
 	
 	# Create new columns for scores 
 	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
@@ -98,9 +96,7 @@ elif 'results' and 'key' in locals():
 			else:
 				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 		totals[dimension] = temp_results.sum(axis=1)
-	
-	st.write(totals)
-	
+
 	# Max Possible 
 	max_out = key.copy()
 	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
@@ -126,8 +122,6 @@ elif 'results' and 'key' in locals():
 	
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
-	
-	st.write(max_out)
 	
 	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	
@@ -160,9 +154,7 @@ elif 'results' and 'key' in locals():
 		max_totals[dimension] = temp_results.sum(axis=1)
 	
 	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
-	
-	st.write(max_totals)
-	
+
 	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
@@ -170,9 +162,6 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals)
 	
-	st.subheader(':blue[_Analysis Results_] :sunglasses:')
-	st.write(totals.sum(axis=1))
-
 	# Create a selectbox widget for column selection
 	selected_column = st.selectbox("Select column for grouping", results.columns)
 	
