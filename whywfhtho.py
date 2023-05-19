@@ -99,6 +99,8 @@ elif 'results' and 'key' in locals():
 				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 		totals[dimension] = temp_results.sum(axis=1)
 	
+	st.write(totals)
+	
 	# Max Possible 
 	max_out = key.copy()
 	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
@@ -141,7 +143,7 @@ elif 'results' and 'key' in locals():
 
 				max_totals[dimension] = temp_results.sum(axis=1)
 	
-	max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
+	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	
 	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
     		totals[col] = totals[col] / max_totals[col][col]
