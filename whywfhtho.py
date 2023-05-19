@@ -65,6 +65,7 @@ elif 'results' and 'key' in locals():
 
 	# Create a new DataFrame with the numeric columns
 	results = results[numeric_columns]
+	st.write(results)
 	
 	# Create new columns for scores 
 	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
