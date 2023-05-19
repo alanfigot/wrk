@@ -161,7 +161,7 @@ elif 'results' and 'key' in locals():
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
-	st.write(totals)
+	st.write(totals.style.format("{:.2%}"))
 	
 	# Create a selectbox widget for column selection
 	selected_column = st.selectbox("Select column for grouping", key['Filters'])
