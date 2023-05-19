@@ -163,6 +163,10 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals.style.format("{:.2}"))
 	
+	import plotly express as px 
+	fig = px.box(totals[['IC','NP','SU','DQ']], points="all") # px.strip
+	fig.show()
+	
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
