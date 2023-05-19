@@ -176,9 +176,9 @@ elif 'results' and 'key' in locals():
 	
 		if 'labels' in locals():
 			tags = {}
-			if len(labels[filt].unique()) == len(results[filt].unique()):
-				for i in range(len(labels[filt].unique())):
-					tags[results[filt].unique()[i]] = labels[filt].unique()[i].strip()
+			if len(labels[selected_filter_id].unique()) == len(results[selected_filter_id].unique()):
+				for i in range(len(labels[selected_filter_id].unique())):
+					tags[results[selected_filter_id].unique()[i]] = labels[selected_filter_id].unique()[i].strip()
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].rename(index=tags).style.format("{:.2}"))
 		else: 
 			st.write(filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']].style.format("{:.2}"))
