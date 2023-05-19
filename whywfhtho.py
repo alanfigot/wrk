@@ -102,9 +102,9 @@ elif 'results' and 'key' in locals():
 	# Max Possible 
 	max_out = key.copy()
 	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
-	    for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
-		mask = max_out[dimension] == condition
-		max_out.loc[mask, dimension] = max_out.loc[mask, column]
+		for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
+			mask = max_out[dimension] == condition
+			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
 	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
 	max_totals = pd.DataFrame(columns={'IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'})
