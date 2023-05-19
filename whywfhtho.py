@@ -166,21 +166,12 @@ elif 'results' and 'key' in locals():
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
-		selected_column = st.selectbox("Select column for grouping", filters)
+		selected_filter = st.selectbox("Select column for grouping", filters)
 	
 		if 'labels' in locals():
-			labels = labels.filter(regex='^P')
-
-			if len(results[selected_column].unique()) == len(labels[selected_column].unique()):
-				tag = {results[selected_column].unique()[i]: labels[selected_column].unique()[i] for i in range(len(results[selected_column].unique()))}
-
-				st.write(results.groupby(selected_column).mean()[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].rename(index=tag))
+			st.write(labels.join(totals).groupby(selected_filter).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
 		else: 
-			# Group the DataFrame by the selected column and calculate the average
-			grouped_df = results.groupby(selected_column).mean()
-
-			# Display the grouped DataFrame
-			st.write(grouped_df[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']])
+			st.write(results.join(totals).groupby(selected_filter).mean()[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']])
 
 else:
     placeholder.text("Please upload the necessary files")
