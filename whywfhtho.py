@@ -93,10 +93,10 @@ elif 'results' and 'key' in locals():
 				
 				elif key.loc[key['Identifier'] == col, dimension].values[0] == 'Max':
 					temp_results[col] = temp_results[col].apply(lambda x: ( (x - minimum) * fraction))
-		    		else:
+				else:
 					temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 			else:
-		    		temp_results[col] = temp_results[col].apply(lambda x: x * 0)
+				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 
 	    	totals[dimension] = temp_results.sum(axis=1)
 	
