@@ -97,8 +97,7 @@ elif 'results' and 'key' in locals():
 					temp_results[col] = temp_results[col].apply(lambda x: x * 0)
 			else:
 				temp_results[col] = temp_results[col].apply(lambda x: x * 0)
-
-	    	totals[dimension] = temp_results.sum(axis=1)
+		totals[dimension] = temp_results.sum(axis=1)
 	
 	# Max Possible 
 	max_out = key.copy()
