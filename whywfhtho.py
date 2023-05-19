@@ -164,7 +164,8 @@ elif 'results' and 'key' in locals():
 	st.write(totals.style.format("{:.2}"))
 	
 	# Create a selectbox widget for column selection
-	selected_column = st.selectbox("Select column for grouping", key['Filter'].unique().dropna())
+	filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
+	selected_column = st.selectbox("Select column for grouping", filters)
 	
 	if 'labels' in locals():
 		labels = labels.filter(regex='^P')
