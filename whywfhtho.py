@@ -69,7 +69,7 @@ elif 'results' and 'key' in locals():
 	st.write(results)
 	
 	# Create new columns for scores 
-	totals = pd.DataFrame(columns={'IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'})
+	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	# len(results.index)
 	
 	# Calculate Scores 
