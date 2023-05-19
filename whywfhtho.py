@@ -23,9 +23,14 @@ if uploaded_files is not None and len(uploaded_files) > 3:
 for uploaded_file in uploaded_files:
 	df = pd.read_csv(uploaded_file)
 	df.rename(columns=lambda x: x.strip(), inplace=True)
-	print(df.columns)
-	if any(string in df.columns for string in ['Identifier','Min','Max']):
+
+	if all(string in df.columns for string in ['Identifier','Min','Max','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']): #any? 
 		key = df
+		for i in key.columns: 
+    			key[i].fillna('', inplace=True)
+		key = key[key['Identifier'].str.startswith('P')]
+		for i in ['Min','Max']: 
+			key[i].fillna(0, inplace=True)
 	else:
 		f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
 		if np.issubdtype(df[f1].dtype, np.number):
@@ -37,7 +42,7 @@ for uploaded_file in uploaded_files:
 if 'key' in locals() and 'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
 	st.write(key, "Please upload Survey Responses")
-		
+	
 # Process the uploaded files
 elif 'results' in locals() and 'key' not in locals():
         st.subheader(':blue[_Survey Responses_]')
@@ -48,36 +53,116 @@ elif 'results' and 'key' in locals():
 	st.write(key)
 	
 	st.subheader(':blue[_Survey Responses_]')
+	results = results.filter(regex='^P')
+	# Convert columns to numeric, dropping the ones that cannot be converted
+	numeric_columns = []
+	for column in results.columns:
+	    try:
+		results[column] = pd.to_numeric(results[column])
+		numeric_columns.append(column)
+	    except ValueError:
+		pass
+
+	# Create a new DataFrame with the numeric columns
+	results = results[numeric_columns]
+	# Write
 	st.write(results)
 	
-	results = results.filter(regex='^(F|X)')
-	for i in ['Identifier','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']: 
-		key[i].fillna('', inplace=True)
+	# Create new columns for scores 
+	totals = pd.DataFrame(columns={'IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'})
+	# len(results.index)
+	
+	# Calculate Scores 
+	valid_columns = key['Identifier'].unique()
 
-	key = key[key['Identifier'].str.startswith(('F','X'))]
+	for dimension in totals.columns:
+	    temp_results = results.copy()
+	    for col in temp_results.columns:
+		if col in valid_columns:
+		    key_match = key.loc[key['Identifier'] == col]
+		    if not key_match.empty:
+			minimum = key_match['Min'].values[0]
+			maximum = key_match['Max'].values[0]
 
-	for i in ['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']: 
-	    results[i] = 0
+			if minimum != maximum and maximum > minimum:
+			    fraction = 1 / (maximum - minimum)
+			else:
+			    fraction = 0
 
-	for col in ['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']:
-		for Qid in key[key[col].str.contains(('Min|Max'))]['Identifier']:
-			if Qid in results.columns:
-				minimum = key.loc[key['Identifier'] == Qid, 'Min'].values[0]
-				maximum = key.loc[key['Identifier'] == Qid, 'Max'].values[0]
-				fraction = 1 / (maximum-minimum)
-				if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Min").any():
-					results[col] = results[col] + (1 -((results[Qid]-minimum)* fraction))	
-				if key.loc[key['Identifier'] == str(Qid), col].str.strip().eq("Max").any():
-					results[col] = results[col] + ((results[Qid]-minimum)* fraction)
+		    if key.loc[key['Identifier'] == col, dimension].values[0] == 'Min':
+			temp_results[col] = temp_results[col].apply(lambda x: (1 -( (x - minimum) * fraction)))
+
+		    elif key.loc[key['Identifier'] == col, dimension].values[0] == 'Max':
+			temp_results[col] = temp_results[col].apply(lambda x: ( (x - minimum) * fraction))
+		    else:
+			temp_results[col] = temp_results[col].apply(lambda x: x * 0)
+		else:
+		    temp_results[col] = temp_results[col].apply(lambda x: x * 0)
+
+	    totals[dimension] = temp_results.sum(axis=1)
+	
+	# Max Possible 
+	max_out = key.copy()
+	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
+	    for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
+		mask = max_out[dimension] == condition
+		max_out.loc[mask, dimension] = max_out.loc[mask, column]
+		
+	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
+	max_totals = pd.DataFrame(columns={'IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'})
+	max_out.set_index('Identifier', inplace=True)
+	max_out = max_out.transpose()
+	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
+	max_out.dropna(axis=1, how='all', inplace=True)
+	
+	valid_columns = key['Identifier'].unique()
+
+	# Calculate Max Score 
+	for dimension in max_totals.columns:
+	    temp_results = max_out.copy()
+	    for col in temp_results.columns:
+		if col in valid_columns:
+		    key_match = key.loc[key['Identifier'] == col]
+		    if not key_match.empty:
+			minimum = key_match['Min'].values[0]
+			maximum = key_match['Max'].values[0]
+
+			if minimum != maximum and maximum > minimum:
+			    fraction = 1 / (maximum - minimum)
+			else:
+			    fraction = 0
+
+		    if key.loc[key['Identifier'] == col, dimension].values[0] == 'Min':
+			temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
+			temp_results[col] = temp_results[col].apply(lambda x: (1 -( (x - minimum) * fraction)))
+
+		    elif key.loc[key['Identifier'] == col, dimension].values[0] == 'Max':
+			temp_results[col] = pd.to_numeric(temp_results[col], errors='coerce')
+			temp_results[col] = temp_results[col].apply(lambda x: ( (x - minimum) * fraction))
+		    else:
+			temp_results[col] = temp_results[col].apply(lambda x: x * 0)
+		else:
+		    temp_results[col] = temp_results[col].apply(lambda x: x * 0)
+
+	    max_totals[dimension] = temp_results.sum(axis=1)
+	
+	max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']]
+	
+	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM', 'FUNC', 'EXPO', 'EXPE']:
+    		totals[col] = totals[col] / max_totals[col][col]
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
-	st.write(results[['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']].transpose())
-
+	st.write(totals)
+	
+	st.subheader(':blue[_Analysis Results_] :sunglasses:')
+	st.write(totals.sum(axis=1))
 
 	# Create a selectbox widget for column selection
 	selected_column = st.selectbox("Select column for grouping", results.columns)
 	
 	if 'labels' in locals():
+		labels = labels.filter(regex='^P')
+		
 		if len(results[selected_column].unique()) == len(labels[selected_column].unique()):
 			tag = {results[selected_column].unique()[i]: labels[selected_column].unique()[i] for i in range(len(results[selected_column].unique()))}
 			
