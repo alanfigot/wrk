@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import numpy as np
 import re 
+import plotly.express as px 
 
 """
 # Persona Development  
@@ -163,7 +164,7 @@ elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals.style.format("{:.2}"))
 	
-	import plotly express as px 
+	
 	fig = px.box(totals[['IC','NP','SU','DQ']], points="all") # px.strip
 	fig.show()
 	
