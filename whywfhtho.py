@@ -24,7 +24,7 @@ for uploaded_file in uploaded_files:
 	df = pd.read_csv(uploaded_file)
 	df.rename(columns=lambda x: x.strip(), inplace=True)
 
-	if all(string in df.columns for string in ['Identifier','Min','Max','IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience']): #any? 
+	if all(string in df.columns for string in ['Identifier','Min','Max','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']): #any? 
 		key = df
 		for i in key.columns: 
     			key[i].fillna('', inplace=True)
@@ -68,7 +68,7 @@ elif 'results' and 'key' in locals():
 	st.write(results)
 	
 	# Create new columns for scores 
-	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
+	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	# len(results.index)
 	
 	# Calculate Scores 
@@ -100,12 +100,12 @@ elif 'results' and 'key' in locals():
 
 	# Max Possible 
 	max_out = key.copy()
-	for dimension in ['IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
+	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']:
 		for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
 			mask = max_out[dimension] == condition
 			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
-	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	
@@ -124,7 +124,7 @@ elif 'results' and 'key' in locals():
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
 	
-	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
+	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
 	
 	valid_columns = key['Identifier'].unique()
 
@@ -154,9 +154,9 @@ elif 'results' and 'key' in locals():
 
 		max_totals[dimension] = temp_results.sum(axis=1)
 	
-	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
 
-	for col in ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
+	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']:
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
@@ -179,10 +179,10 @@ elif 'results' and 'key' in locals():
 			if len(labels[selected_filter_id].unique()) == len(results[selected_filter_id].unique()):
 				for i in range(len(labels[selected_filter_id].unique())):
 					tags[results[selected_filter_id].unique()[i]] = labels[selected_filter_id].unique()[i].strip()
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']].rename(index=tags)
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']].rename(index=tags)
 			st.write(filtered_results.style.format("{:.2}"))
 		else: 
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
 			st.write(filtered_results.style.format("{:.2}"))
 	
 	# Download Options
