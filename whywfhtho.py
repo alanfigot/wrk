@@ -21,7 +21,7 @@ if uploaded_files is not None and len(uploaded_files) > 3:
     uploaded_files = uploaded_files[:3]
 	
 for uploaded_file in uploaded_files:
-	df = pd.read_csv(uploaded_file, error_bad_lines=False)
+	df = pd.read_csv(uploaded_file)
 	df.rename(columns=lambda x: x.strip(), inplace=True)
 
 	if all(string in df.columns for string in ['Identifier','Min','Max','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']): #any? 
