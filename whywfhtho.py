@@ -184,7 +184,7 @@ elif 'results' and 'key' in locals():
 		if 'labels' in locals():
 			filtered_results = labels[key[key['Filter']==selected_filter]['Identifier'].values].join(totals).groupby(selected_filter_id).mean()
 			st.write(filtered_results.style.format("{:.2}"))
-		elif 'values in locals(): 
+		elif 'values' in locals(): 
 			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
 			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
