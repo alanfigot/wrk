@@ -174,7 +174,7 @@ elif 'results' and 'key' in locals():
 	
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
-		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
+		filters = [item for item in list(key['Filter'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
 	# else: 
 	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
 		
