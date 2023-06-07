@@ -21,29 +21,30 @@ if uploaded_files is not None and len(uploaded_files) > 3:
     uploaded_files = uploaded_files[:3]
 
 for uploaded_file in uploaded_files:
-	filename = uploaded_file.name
-	if filename.endswith('.csv') == True:
-        	df = pd.read_csv(uploaded_file, index_col=False)
-	elif filename.endswith('.xlsx') == True:
-		df = pd.read_excel(uploaded_file, index_col=False)
-	df.rename(columns=lambda x: x.strip(), inplace=True)
-	# Identify Score Key File 
-	if all(string in df.columns for string in ['Identifier','Min','Max']): #any?     
-        	key = df 
-        	key['Identifier'].fillna('', inplace=True)
-        	key = key[key['Identifier'].str.startswith('P')]
-        	key = key.reset_index(drop=True)
-        	for i in ['Min','Max']: 
-            		key[i].fillna(0, inplace=True)
-    	
-	# Identify Results
-	else:
-		f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
-		if np.issubdtype(df[f1].dtype, np.number):
-			results = df
-	# Identify Values
+	if uploaded_file is not None:
+		filename = uploaded_file.name
+		if filename.endswith('.csv') == True:
+			df = pd.read_csv(uploaded_file, index_col=False)
+		elif filename.endswith('.xlsx') == True:
+			df = pd.read_excel(uploaded_file)
+		df.rename(columns=lambda x: x.strip(), inplace=True)
+		# Identify Score Key File 
+		if all(string in df.columns for string in ['Identifier','Min','Max']): #any?     
+			key = df 
+			key['Identifier'].fillna('', inplace=True)
+			key = key[key['Identifier'].str.startswith('P')]
+			key = key.reset_index(drop=True)
+			for i in ['Min','Max']: 
+				key[i].fillna(0, inplace=True)
+
+		# Identify Results
 		else:
-			labels = df
+			f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
+			if np.issubdtype(df[f1].dtype, np.number):
+				results = df
+		# Identify Values
+			else:
+				labels = df
 
 # Process the uploaded files
 if 'key' in locals() and 'results' not in locals():
