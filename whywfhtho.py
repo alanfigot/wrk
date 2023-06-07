@@ -14,29 +14,36 @@ placeholder = st.empty()
 
 # Upload CSV files
 st.subheader("Upload a Score Key and Survey Results")
-uploaded_files = st.file_uploader("Files must be in CSV format...", type="csv", accept_multiple_files=True)
+uploaded_files = st.file_uploader("Files must be in .CSV or .XLSX format...", type=["csv","xlsx"], accept_multiple_files=True)
 
 if uploaded_files is not None and len(uploaded_files) > 3:
     st.warning("Please upload a maximum of 3 files. Only the first 3 files will be considered.")
     uploaded_files = uploaded_files[:3]
-	
-for uploaded_file in uploaded_files:
-	df = pd.read_csv(uploaded_file)
-	df.rename(columns=lambda x: x.strip(), inplace=True)
 
-	if all(string in df.columns for string in ['Identifier','Min','Max','IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE']): #any? 
-		key = df
-		for i in key.columns: 
-    			key[i].fillna('', inplace=True)
-		key = key[key['Identifier'].str.startswith('P')]
-		for i in ['Min','Max']: 
-			key[i].fillna(0, inplace=True)
-	else:
-		f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
-		if np.issubdtype(df[f1].dtype, np.number):
-			results = df
-		else:
-			labels = df
+for uploaded_file in uploaded_files:
+	if uploaded_file.endswith('.csv') == True:
+        	df = pd.read_csv(uploaded_file, index_col=False)
+	elif uploaded_file.endswith('.xlsx') == True:
+		df = pd.read_excel(io=uploaded_file)
+    df.rename(columns=lambda x: x.strip(), inplace=True)
+    
+    # Identify Score Key File 
+    if all(string in df.columns for string in ['Identifier','Min','Max']): #any?     
+        key = df 
+        key['Identifier'].fillna('', inplace=True)
+        key = key[key['Identifier'].str.startswith('P')]
+        key = key.reset_index(drop=True)
+        for i in ['Min','Max']: 
+            key[i].fillna(0, inplace=True)
+    
+    # Identify Results
+    else:
+        f1 = list(filter(lambda x: re.match(r'^P\d', x), df))[0]
+        if np.issubdtype(df[f1].dtype, np.number):
+            results = df
+    # Identify Values
+        else:
+            labels = df
 
 # Process the uploaded files
 if 'key' in locals() and 'results' not in locals():
@@ -68,7 +75,7 @@ elif 'results' and 'key' in locals():
 	st.write(results)
 	
 	# Create new columns for scores 
-	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
+	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
 	# len(results.index)
 	
 	# Calculate Scores 
@@ -100,12 +107,12 @@ elif 'results' and 'key' in locals():
 
 	# Max Possible 
 	max_out = key.copy()
-	for dimension in ['IC', 'SU','DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']:
+	for dimension in ['IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
 		for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
 			mask = max_out[dimension] == condition
 			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
-	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
+	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	
@@ -124,7 +131,7 @@ elif 'results' and 'key' in locals():
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
 	
-	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','TEAM','FUNC','EXPO','EXPE'])
+	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
 	
 	valid_columns = key['Identifier'].unique()
 
@@ -154,9 +161,9 @@ elif 'results' and 'key' in locals():
 
 		max_totals[dimension] = temp_results.sum(axis=1)
 	
-	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
+	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 
-	for col in ['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']:
+	for col in ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
@@ -179,10 +186,10 @@ elif 'results' and 'key' in locals():
 			if len(labels[selected_filter_id].unique()) == len(results[selected_filter_id].unique()):
 				for i in range(len(labels[selected_filter_id].unique())):
 					tags[results[selected_filter_id].unique()[i]] = labels[selected_filter_id].unique()[i].strip()
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']].rename(index=tags)
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']].rename(index=tags)
 			st.write(filtered_results.style.format("{:.2}"))
 		else: 
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'TEAM','FUNC','EXPO','EXPE']]
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
 	
 	# Download Options
