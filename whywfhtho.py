@@ -22,9 +22,9 @@ if uploaded_files is not None and len(uploaded_files) > 3:
 
 for uploaded_file in uploaded_files:
 	filename = str(uploaded_file.name)
-	if filename.endswith.('.csv') == True:
+	if filename.str.endswith.('.csv') == True:
         	df = pd.read_csv(uploaded_file, index_col=False)
-	elif filename.endswith('.xlsx') == True:
+	elif filename.str.endswith('.xlsx') == True:
 		df = pd.read_excel(io=uploaded_file)
 	df.rename(columns=lambda x: x.strip(), inplace=True)
 	# Identify Score Key File 
