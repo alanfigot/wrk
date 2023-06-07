@@ -33,7 +33,7 @@ for uploaded_file in uploaded_files:
         	key = key[key['Identifier'].str.startswith('P')]
         	key = key.reset_index(drop=True)
         	for i in ['Min','Max']: 
-            	key[i].fillna(0, inplace=True)
+            		key[i].fillna(0, inplace=True)
     	
 	# Identify Results
 	else:
