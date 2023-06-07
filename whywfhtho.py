@@ -176,7 +176,7 @@ elif 'results' and 'key' in locals():
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) != '']
 	# else: 
-	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) != '']
+	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) not in ['',np.nan,'nan']]
 		
 		selected_filter = st.selectbox("Select filter for grouping", filters)
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
