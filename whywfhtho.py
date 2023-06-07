@@ -21,7 +21,7 @@ if uploaded_files is not None and len(uploaded_files) > 3:
     uploaded_files = uploaded_files[:3]
 
 for uploaded_file in uploaded_files:
-	if uploaded_file is not None:
+	if uploaded_file:
 		filename = uploaded_file.name
 		if filename.endswith('.csv') == True:
 			df = pd.read_csv(uploaded_file, index_col=False)
