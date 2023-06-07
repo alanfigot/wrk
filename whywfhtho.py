@@ -181,19 +181,14 @@ elif 'results' and 'key' in locals():
 		selected_filter = st.selectbox("Select filter for grouping", filters)
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
 		
-		filtered_results = results.join(totals).groupby(selected_filter_id).mean()
-	
 		if 'labels' in locals():
-			tags = {}
-			if len(labels[selected_filter_id].unique()) == len(results[selected_filter_id].unique()):
-				for i in range(len(labels[selected_filter_id].unique())):
-					tags[results[selected_filter_id].unique()[i]] = labels[selected_filter_id].unique()[i].strip()
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']].rename(index=tags)
+			filtered_results = labels[key[key['Filter']==selected_filter]['Identifier'].values].join(totals).groupby(selected_filter_id).mean()
 			st.write(filtered_results.style.format("{:.2}"))
-		else: 
+		elif 'values in locals(): 
+			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
 			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
-	
+
 	# Download Options
 	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
 	download_df = totals
