@@ -41,8 +41,8 @@ for uploaded_file in uploaded_files:
 		if np.issubdtype(df[f1].dtype, np.number):
 			results = df
 	# Identify Values
-	else:
-		labels = df
+		else:
+			labels = df
 
 # Process the uploaded files
 if 'key' in locals() and 'results' not in locals():
