@@ -25,7 +25,7 @@ for uploaded_file in uploaded_files:
 	if filename.endswith('.csv') == True:
         	df = pd.read_csv(uploaded_file, index_col=False)
 	elif filename.endswith('.xlsx') == True:
-		df = pd.read_excel(uploaded_file)
+		df = pd.read_excel(uploaded_file, index_col=False)
 	df.rename(columns=lambda x: x.strip(), inplace=True)
 	# Identify Score Key File 
 	if all(string in df.columns for string in ['Identifier','Min','Max']): #any?     
