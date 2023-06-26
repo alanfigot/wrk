@@ -224,12 +224,15 @@ if 'results' in locals() and 'key' in locals():
 		elif variable1 != '' and variable2 != '':
 			fig1 = px.scatter(score, x=variable1, y=variable2) 
 			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
-			
-		tab1, tab2 = st.tabs(["Scatter", "Distribution"])
-		with tab1:
-			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
-		with tab2:
-			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
+
+		if variable1 != '' and variable2 != '':
+			tab1, tab2 = st.tabs(["Scatter", "Distribution"])
+			with tab1:
+				st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
+			with tab2:
+				st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
+		else: 
+			pass 
 
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # on_change=refresh_plot
