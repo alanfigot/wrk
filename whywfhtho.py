@@ -53,7 +53,7 @@ if 'key' in locals() and 'labels' in locals() and 'results' in locals():
 
 elif 'key' in locals() and 'results' in locals() and 'labels' not in locals():
 	st.write("Please remember to upload Survey Label Responses")
-	continue
+	pass
 
 elif 'key' in locals() and 'results' not in locals():
 	st.subheader(':blue[_Survey Score Key_]')
