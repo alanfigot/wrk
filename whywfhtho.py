@@ -207,12 +207,8 @@ if 'results' in locals() and 'key' in locals():
 	
 	st.subheader(':blue[_Data Visualization_] ')
 
-	if 'labels' in locals(): 
-		score = labels.join(totals)
-		score.fillna('', inplace=True)
-	else: 
-		score = results.join(totals)
-		score.fillna('', inplace=True)
+	score = results.join(totals)
+	score.fillna('', inplace=True)
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
