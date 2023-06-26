@@ -185,7 +185,14 @@ if 'results' in locals() and 'key' in locals():
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals.style.format("{:.2}"))
-	
+	st.write("Make sure all scores are between 0 and 1")
+
+	graphic = st.radio(
+		"Select one of the following options:",
+		('Scatter', 'Bar', 'Distribution', 'Box'))
+
+	st.write(graphic)
+		
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
