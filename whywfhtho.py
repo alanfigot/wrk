@@ -237,7 +237,9 @@ if 'results' in locals() and 'key' in locals():
 
 		# Bar Plot
 		temp = [column for column in score.columns if pd.api.types.is_numeric_dtype(score[column])]
-		temp = score.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
+		st.write(temp)
+		temp = score.groupby(variable3_id).mean() # .sort_values(variable1, ascending=False)
+		st.write(temp)
 		if len(score[variable3_id].unique())>10:
 			temp = pd.concat([temp.head(5),temp.tail(5)])
     
