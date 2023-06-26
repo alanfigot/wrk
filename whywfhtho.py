@@ -261,12 +261,9 @@ if 'results' in locals() and 'key' in locals():
 		    	temp = score
 		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all") # color=sub_category 
 		
-		fig.update_layout(title_text=f'{value} Score')
-		fig.update_xaxes(title=key[key['Identifier']==category]['Questions'].values[0]) # ticklabelposition="inside top", 
-		fig.update_layout(legend_title=key[key['Identifier']==sub_category]['Questions'].values[0])
-		
-		fig.show()
-			
+		# fig4.update_layout(title_text=f'{value} Score')
+		# fig4.update_xaxes(title=key[key['Identifier']==category]['Questions'].values[0]) # ticklabelposition="inside top", 
+		# fig4.update_layout(legend_title=key[key['Identifier']==sub_category]['Questions'].values[0])
 				
 		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Violin"]) # "Violin"
 		with tab1:
