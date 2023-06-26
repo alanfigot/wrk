@@ -15,7 +15,7 @@ placeholder = st.empty()
 
 # Upload CSV files
 st.subheader("Upload a Score Key and Survey Results")
-uploaded_files = st.file_uploader("Files must be in .CSV or .XLSX format...", type=["csv","xlsx"], accept_multiple_files=True)
+uploaded_files = st.file_uploader("Files must be in .CSV or .XLSX format...", type=["csv","xlsx","xls"], accept_multiple_files=True)
 
 if uploaded_files is not None and len(uploaded_files) > 3:
     st.warning("Please upload a maximum of 3 files. Only the first 3 files will be considered.")
