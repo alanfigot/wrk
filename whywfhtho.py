@@ -31,7 +31,7 @@ for uploaded_file in uploaded_files:
 			df = pd.read_excel(uploaded_file)
 		df.rename(columns=lambda x: x.strip(), inplace=True)
 		# Identify Score Key File 
-		if all(string in df.columns for string in ['Identifier','Min','Max']): #any?     
+		if all(string in df.columns for string in ['Identifier','Questions','Min','Max']): #any?     
 			key = df 
 			key['Identifier'].fillna('', inplace=True)
 			key = key[key['Identifier'].str.startswith('P')]
@@ -218,23 +218,28 @@ if 'results' in locals() and 'key' in locals():
 		"Select one of the following options:",
 		('Scatter', 'Bar', 'Distribution', 'Box'))
 	
-
-	st.write(graphic)
-	if graphic == "Scatter":
-	
-		x_axis = st.selectbox("Score:",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		y_axis = st.selectbox("Category",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		color_by = st.selectbox('Sub Category',[''] + key['Questions'].values)
+		variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		variable3 = st.selectbox('Variable 3',[''] + key['Questions'].values)
 		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
 		# size_by = st.selectbox('Dimension',score.columns)
+
+	button = st.button('Refresh Plot')
+
+	if button():
+		refresh_plot()
+
+	def refresh_plot():
 		
-		fig = px.scatter(score, x=x_axis, y=y_axis, color=identifier) # color=color_by, facet_col=split_by
-		# fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
-		# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
-		
-	else:
-		pass
+		if graphic == "Scatter":
+			if variable3 != '': 
+				fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
+			else:
+				fig = px.scatter(score, x=variable1, y=variable2)
+			# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
+			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+		else:
+			pass
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
