@@ -220,7 +220,10 @@ if 'results' in locals() and 'key' in locals():
 	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
 	variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
-	
+
+	while variable1 == '' or variable2 != '' or variable3 != '':
+		st.write("Please select variables.")
+		
 	if variable1 != '' and variable2 != '' and variable3 != '': 		
 		
 		# Scatter
@@ -250,10 +253,9 @@ if 'results' in locals() and 'key' in locals():
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
 		with tab3:
 			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
+	else:
+		pass
 			
-	else: 
-		st.write("Please select variables.")
-
 
 
 	# else: 
