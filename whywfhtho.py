@@ -223,9 +223,9 @@ if 'results' in locals() and 'key' in locals():
 	st.write(graphic)
 	if graphic == "Scatter":
 	
-		x_axis = st.selectbox("Dimension:",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		y_axis = st.selectbox('Dimension',['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		color_by = st.selectbox('Dimension',key['Questions'].values)
+		x_axis = st.selectbox("Score:",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		y_axis = st.selectbox("Category",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		color_by = st.selectbox('Sub Category',[''] + key['Questions'].values)
 		# size_by = st.selectbox('Dimension',score.columns)
 		
 		fig = px.scatter(score, x=x_axis, y=y_axis) # color=color_by, facet_col=split_by
