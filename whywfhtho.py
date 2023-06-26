@@ -243,8 +243,8 @@ if 'results' in locals() and 'key' in locals():
 	
 	button = st.button("Refresh Plot")
 
-	#if button:
-	#	refresh_plot(graphic, variable1, variable2, variable3)
+	if button:
+		refresh_plot(score, variable1, variable2, variable3)
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
