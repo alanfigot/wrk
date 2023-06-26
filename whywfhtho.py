@@ -232,10 +232,6 @@ if 'results' in locals() and 'key' in locals():
 		# Histogram
 		fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
 		
-		# Bar
-		temp = score.groupby(variable2).mean().sort_values(variable1, ascending=False)
-		fig3 = px.bar(temp, y= variable1, barmode='group')
-		
 		fig4 = px.histogram(score, x=variable1, hover_data=score.columns)
 
 			
