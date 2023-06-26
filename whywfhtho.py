@@ -219,7 +219,7 @@ if 'results' in locals() and 'key' in locals():
 	variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 	variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 	variable3 = st.selectbox('Variable 3',[''] + key['Questions'].values)
-	if variable != '':
+	if variable3 != '':
 		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
 
 	button = st.button("Refresh Plot")
@@ -228,7 +228,7 @@ if 'results' in locals() and 'key' in locals():
 		if variable1 != '' and variable2 != '' and variable3 != '': 
 			fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
-		elif ariable1 != '' and variable2 != '':
+		elif variable1 != '' and variable2 != '':
 			fig = px.scatter(score, x=variable1, y=variable2)
 			# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
