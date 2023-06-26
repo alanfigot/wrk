@@ -218,48 +218,50 @@ if 'results' in locals() and 'key' in locals():
 
 	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
-	
 	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
-	variable3_id = ''
-	if variable3 != '':
-		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
+	variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
 	
-	if variable1 != '' and variable2 != '': 		
-		if variable3 != '': 
-			fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
-			fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
+	if variable1 != '' and variable2 != '' and variable3 != '': 		
+		
+		# Scatter
+		fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
+		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
 
-			# Bar Plot
-			temp = score.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
-			if len(score[variable3_id].unique())>10:
-				temp = pd.concat([temp.head(5),temp.tail(5)])
+		# Distribution 
+		fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
+		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
+
+		# Bar Plot
+		temp = score.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
+		if len(score[variable3_id].unique())>10:
+			temp = pd.concat([temp.head(5),temp.tail(5)])
     
-			fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
-			if len(score[variable3_id].unique())>10:
-    				fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
-			else: 
-    				fig3.update_layout(title_text=f'{variable1} Scores')
-		
+		fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
+		if len(score[variable3_id].unique())>10:
+    			fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
 		else: 
-			# Scatter
-			fig1 = px.scatter(score, x=variable1, y=variable2) 
-			# Histogram
-			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
-
-	fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
-	fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
+    			fig3.update_layout(title_text=f'{variable1} Scores')
 	
 		
-	if variable1 != '' and variable2 != '' and variable3 != '':
 		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar"]) # "Violin"
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
-		with tab2:
+		with tab3:
 			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
+			
 	else: 
 		st.write("Please select variables.")
+
+
+
+	# else: 
+	#		# Scatter
+	#		fig1 = px.scatter(score, x=variable1, y=variable2) 
+	#		# Histogram
+	#		fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
+
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
