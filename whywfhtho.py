@@ -70,6 +70,11 @@ elif 'key' not in locals() and 'results' in locals():
 		st.subheader(':blue[_Survey Label Responses_]')
 		st.write(labels)
 	st.write("Please upload Survey Score Key")
+
+elif 'key' not in locals() and 'results' not in locals() 'labels' in locals():
+	st.subheader(':blue[_Survey Label Responses_]')
+	st.write(labels)
+	st.write("Please upload Survey Score Key and Survey Value Responses")
 	
 if 'results' in locals() and 'key' in locals():
 	# results = results.filter(regex='^P')
