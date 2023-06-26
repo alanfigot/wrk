@@ -236,8 +236,8 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
 		# Bar Plot
-		temp = results.join(totals).fillna('', inplace=True)
-		temp = temp.groupby(variable3_id) # as_index=False).mean().sort_values(variable1, ascending=False)
+		temp = results.join(totals).fillna('')
+		temp = temp.groupby(variable3_id, as_index=False).mean().sort_values(variable1, ascending=False)
 		st.write(temp)
 		
 		# if len(score[variable3_id].unique())>10:
