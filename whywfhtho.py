@@ -253,10 +253,10 @@ if 'results' in locals() and 'key' in locals():
 		# Violin Plot 
 		if len(score[variable3_id].unique())>10:
 			list_a = list(score.groupby(variable3_id).mean().sort_values(variable1).head(5).index.values)
-		    	list_b = list(score.groupby(variable3_id).mean().sort_values(variable1).tail(5).index.values)
-		    	list_c = list_a + list_b
-		    	temp = score[score[variable3_id].isin(list_c)]
-		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all")
+			list_b = list(score.groupby(variable3_id).mean().sort_values(variable1).tail(5).index.values)
+			list_c = list_a + list_b
+			temp = score[score[variable3_id].isin(list_c)]
+			fig4 = px.box(temp, x=variable3_id, y = variable1, points="all")
 		else:
 		    	temp = score
 		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all") # color=sub_category 
