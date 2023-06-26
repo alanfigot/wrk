@@ -216,13 +216,6 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
-	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # on_change=refresh_plot
-	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)), on_change=refresh_plot)
-	identifier = ''
-	if variable3 != '':
-		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
-
 	def refresh_plot(score, variable1, variable2, variable3):
 		
 		if variable1 != '' and variable2 != '' and variable3 != '': 
@@ -238,6 +231,12 @@ if 'results' in locals() and 'key' in locals():
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
 
+	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
+	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # on_change=refresh_plot
+	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)), on_change=refresh_plot)
+	identifier = ''
+	if variable3 != '':
+		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
 	
 	# def refresh_plot(score, variable1, variable2, variable3):
 	#	if variable1 != '' and variable2 != '' and variable3 != '': 
