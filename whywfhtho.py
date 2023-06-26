@@ -238,7 +238,7 @@ if 'results' in locals() and 'key' in locals():
 			if len(score[variable3_id].unique())>10:
     				fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
 			else: 
-    				fig.3update_layout(title_text=f'{variable1} Scores')
+    				fig3.update_layout(title_text=f'{variable1} Scores')
 		
 		else: 
 			# Scatter
