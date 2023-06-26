@@ -229,8 +229,8 @@ if 'results' in locals() and 'key' in locals():
 		# size_by = st.selectbox('Dimension',score.columns)
 		
 		fig = px.scatter(score, x=x_axis, y='IC') # color=color_by, facet_col=split_by
-		fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
-		fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
+		# fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
+		# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
 		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 		
 	else:
