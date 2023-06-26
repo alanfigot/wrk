@@ -216,11 +216,11 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	def refresh_plot(score, variable1, variable2, variable3):
+	def refresh_plot(score, variable1, variable2, variable3, **kwargs):
 		
 		if variable1 != '' and variable2 != '' and variable3 != '': 
-			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier) 
-			fig2 = px.histogram(score, x=variable1, color=identifier, hover_data=score.columns)
+			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier, **kwargs) 
+			fig2 = px.histogram(score, x=variable1, color=variable3, **kwargss)
 		elif variable1 != '' and variable2 != '':
 			fig1 = px.scatter(score, x=variable1, y=variable2) 
 			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
@@ -236,7 +236,7 @@ if 'results' in locals() and 'key' in locals():
 
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
-	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
+	variable3 = st.selectbox('Color by',list([''] + list(key['Questions'].values)))
 	identifier = ''
 	if variable3 != '':
 		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
@@ -244,7 +244,7 @@ if 'results' in locals() and 'key' in locals():
 	button = st.button("Refresh Plot")
 
 	if button:
-		refresh_plot(score, variable1, variable2, variable3)
+		refresh_plot(score, variable1, variable2, variable3, alpha=0.5)
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
