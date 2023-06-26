@@ -225,8 +225,8 @@ if 'results' in locals() and 'key' in locals():
 	
 		x_axis = st.selectbox('Dimension',('IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'))
 		y_axis = st.selectbox('Dimension',('IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'))
-		color_by = score.columns
-		size_by = score.columns
+		color_by = st.selectbox('Dimension',score.columns)
+		size_by = st.selectbox('Dimension',score.columns)
 		
 		fig = px.scatter(score, x=x_axis, y=y_axis, color=color_by) # facet_col=split_by
 		fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
