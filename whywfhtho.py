@@ -218,7 +218,7 @@ if 'results' in locals() and 'key' in locals():
 
 	def refresh_plot(graphic, variable1, variable2, variable3):
 		if graphic == "Scatter":
-			scatter_plot()
+			scatter_plot(variable1, variable2, variable3)
 		elif graphic == "Bar":
 			pass
 		elif graphic == "Distribution":
