@@ -233,9 +233,9 @@ if 'results' in locals() and 'key' in locals():
 	if variable1 != '' and variable2 != '' and filter_by != '': 		
 		if variable3 != '': 
 			
-			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier)
+			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier1)
 			
-			fig2 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
+			fig2 = px.histogram(score, x=variable1, color=identifier1, hover_data=score.columns)
 			
 			temp = score.groupby(filter_by).mean().sort_values(variable1, ascending=False)
 			fig3 = px.bar(temp, y= variable1, barmode='group')
