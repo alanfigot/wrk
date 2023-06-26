@@ -214,11 +214,10 @@ if 'results' in locals() and 'key' in locals():
 		score = results.join(totals)
 		score.fillna('', inplace=True)
 
-	st.write(score)
-	
 	graphic = st.radio(
 		"Select one of the following options:",
 		('Scatter', 'Bar', 'Distribution', 'Box'))
+	
 
 	st.write(graphic)
 	if graphic == "Scatter":
@@ -226,9 +225,10 @@ if 'results' in locals() and 'key' in locals():
 		x_axis = st.selectbox("Score:",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 		y_axis = st.selectbox("Category",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 		color_by = st.selectbox('Sub Category',[''] + key['Questions'].values)
+		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
 		# size_by = st.selectbox('Dimension',score.columns)
 		
-		fig = px.scatter(score, x=x_axis, y=y_axis) # color=color_by, facet_col=split_by
+		fig = px.scatter(score, x=x_axis, y=y_axis, color=identifier) # color=color_by, facet_col=split_by
 		# fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
 		# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
 		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
