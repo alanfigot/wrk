@@ -219,10 +219,10 @@ if 'results' in locals() and 'key' in locals():
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	
-	variable3 = st.selectbox('Color by',list([''] + list(key['Questions'].values)))
+	variable3 = st.selectbox('Color by',list([''] + list(key['Filter'].unique().values)))
 	variable3_id = ''
 	if variable3 != '':
-		variable3_id = key[key['Questions']==variable3]['Identifier'].values[0]
+		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
 	
 	if variable1 != '' and variable2 != '': 		
 		if variable3 != '': 
