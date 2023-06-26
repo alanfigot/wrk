@@ -219,7 +219,7 @@ if 'results' in locals() and 'key' in locals():
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	
-	variable3 = st.selectbox('Color by',list([''] + list(key['Filter'].unique())))
+	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]])))
 	variable3_id = ''
 	if variable3 != '':
 		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
