@@ -207,7 +207,7 @@ if 'results' in locals() and 'key' in locals():
 	
 	st.subheader(':blue[_Data Visualization_] ')
 
-	if 'labels' in locals: 
+	if 'labels' in locals(): 
 		score = labels.join(totals)
 		score.fillna('', inplace=True)
 	else: 
