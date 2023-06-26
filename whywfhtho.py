@@ -225,6 +225,7 @@ if 'results' in locals() and 'key' in locals():
 	
 		x_axis = st.selectbox("Dimension:",['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 		y_axis = st.selectbox('Dimension',['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		options = st.multiselect('What are your favorite colors', score.columns)
 		# color_by = st.selectbox('Dimension',score.columns)
 		# size_by = st.selectbox('Dimension',score.columns)
 		
