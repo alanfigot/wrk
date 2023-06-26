@@ -216,7 +216,7 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
+	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
 	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
 	identifier = ''
