@@ -222,13 +222,9 @@ if 'results' in locals() and 'key' in locals():
 		color_by = 'SU'
 		size_by = 'P3'
 		
-		fig = px.scatter(score, x=x_axis, y=y_axis, color=color_by, facet_col=split_by)
-		fig.update_traces(marker=dict(size=results[size_by]*2,
-		                              line=dict(width=0,
-		                                        color='DarkSlateGrey')),
-		                  selector=dict(mode='markers'))
-		fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-		
+		fig = px.scatter(score, x=x_axis, y=y_axis) # color=color_by, facet_col=split_by
+		# fig.update_traces(marker=dict(size=results[size_by]*2,line=dict(width=0,color='DarkSlateGrey')),selector=dict(mode='markers'))
+		# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
 		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 	else:
 		pass
