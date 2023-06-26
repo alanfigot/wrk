@@ -216,8 +216,8 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 	
-	variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-	variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
 	if variable3 != '':
 		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
