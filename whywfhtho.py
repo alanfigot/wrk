@@ -47,18 +47,25 @@ for uploaded_file in uploaded_files:
 			else:
 				labels = df
 
-# Process the uploaded files
-if 'key' in locals() and 'results' not in locals():
-	st.subheader(':blue[_Score Key_]')
-	st.write(key, "Please upload Survey Value Responses")
-
-elif 'key' in locals() and 'labels' in locals() and'results' not in locals():
+if 'key' in locals() and 'labels' in locals() and'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
 	st.write(key) 
 	st.subheader(':blue[_Labels_]')
 	st.write(labels) 
 	st.write("Please upload Survey Value Responses")
+
+# Process the uploaded files
+elif 'key' in locals() and 'results' not in locals():
+	st.subheader(':blue[_Score Key_]')
+	st.write(key, "Please upload Survey Value Responses")
 	
+# Process the uploaded files
+elif 'results' in locals() and 'labels' in locals() and 'key' not in locals():
+        st.subheader(':blue[_Survey Responses_]')
+        st.write(results)
+	st.subheader(':blue[_Survey Labels_]')
+        st.write(labels, "Please upload Survey Score Key")
+
 # Process the uploaded files
 elif 'results' in locals() and 'key' not in locals():
         st.subheader(':blue[_Survey Responses_]')
