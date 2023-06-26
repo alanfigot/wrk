@@ -254,7 +254,7 @@ if 'results' in locals() and 'key' in locals():
 		with tab3:
 			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
 	else:
-		pass
+		st.write("Please select all variables")
 			
 
 
