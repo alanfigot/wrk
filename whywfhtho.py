@@ -230,6 +230,8 @@ if 'results' in locals() and 'key' in locals():
 		fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
 		
 		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+	else:
+		pass
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
