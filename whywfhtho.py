@@ -49,7 +49,7 @@ for uploaded_file in uploaded_files:
 
 # Show which files exist
 if 'key' in locals() and 'labels' in locals() and 'results' in locals():
-	continue
+	pass 
 
 elif 'key' in locals() and 'results' in locals() and 'labels' not in locals():
 	st.write("Please remember to upload Survey Label Responses")
