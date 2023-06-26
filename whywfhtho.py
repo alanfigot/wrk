@@ -234,9 +234,9 @@ if 'results' in locals() and 'key' in locals():
 		else: 
 			st.write("Please select all three variables before refreshing the graphs.")
 
-	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
-	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # on_change=refresh_plot
-	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)), on_change=refresh_plot)
+	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # 
+	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
+	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
 	identifier = ''
 	if variable3 != '':
 		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
