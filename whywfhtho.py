@@ -216,8 +216,8 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
-	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
+	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
+	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	
 	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
 	variable3_id = ''
@@ -228,21 +228,37 @@ if 'results' in locals() and 'key' in locals():
 		if variable3 != '': 
 			fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
 			fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
+
+			# Bar Plot
+			temp = score.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
+			if len(score[variable3_id].unique())>10:
+				temp = pd.concat([temp.head(5),temp.tail(5)])
+    
+			fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
+			if len(score[variable3_id].unique())>10:
+    				fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
+			else: 
+    				fig.3update_layout(title_text=f'{variable1} Scores')
+		
 		else: 
 			# Scatter
 			fig1 = px.scatter(score, x=variable1, y=variable2) 
 			# Histogram
 			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
 
-		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
-		fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
+	fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
+	fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
+	
+	else if variable1 != '' or variable2!= '':
 		
-	if variable1 != '' and variable2 != '':
-		tab1, tab2 = st.tabs(["Scatter", "Distribution"]) # "Bar", "Violin"
+	if variable1 != '' and variable2 != '' and variable3 != '':
+		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar"]) # "Violin"
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
+		with tab2:
+			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
 	else: 
 		st.write("Please select variables.")
 
