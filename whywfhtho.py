@@ -52,7 +52,7 @@ if 'key' in locals() and 'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
 	st.write(key, "Please upload Survey Value Responses")
 
-if 'key' in locals() and 'labels' in locals() and'results' not in locals():
+elif 'key' in locals() and 'labels' in locals() and'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
 	st.write(key) 
 	st.subheader(':blue[_Labels_]')
