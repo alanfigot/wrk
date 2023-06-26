@@ -64,7 +64,6 @@ elif 'key' not in locals() and 'results' in locals():
 	st.write(results, "Please upload Survey Score Key")
 	
 if 'results' and 'key' in locals():
-
 	results = results.filter(regex='^P')
 	# Convert columns to numeric, dropping the ones that cannot be converted
 	numeric_columns = []
