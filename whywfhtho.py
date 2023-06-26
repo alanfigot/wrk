@@ -214,17 +214,31 @@ if 'results' in locals() and 'key' in locals():
 		score = results.join(totals)
 		score.fillna('', inplace=True)
 
-	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
+	graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 	
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
-	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
-	if variable3 != '':
-		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
+
+	if graphic != "Bar":
+		variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
+		if variable3 != '':
+			identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
 
 	button = st.button("Refresh Plot")
 
 	def refresh_plot():
+		if graphic == "Scatter":
+			scatter_plot()
+		elif graphic == "Bar":
+			pass
+		elif graphic == "Distribution":
+			pass
+		elif graphic == "Box":
+			pass
+		else:
+			pass
+
+	def scatter_plot():
 		if variable1 != '' and variable2 != '' and variable3 != '': 
 			fig = px.scatter(score, x=variable1, y=variable2, color=identifier) 
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
