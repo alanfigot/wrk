@@ -263,10 +263,11 @@ if 'results' in locals() and 'key' in locals():
 			list_c = list_a + list_b
 			temp = score[score[variable3_id].isin(list_c)]
 			fig4 = px.box(temp, x=variable3_id, y = variable1, points="all")
-		elif len(score[variable3_id].unique())<=10 and variable4_id != '':
-			temp = score
-		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all", color=variable4_id)
-		
+		else:
+			if variable4_id != '':
+				temp = score
+				fig4 = px.box(temp, x=variable3_id, y = variable1, points="all", color=variable4_id)
+			
 		fig4.update_layout(title_text=f'{variable1} Score')
 		fig4.update_xaxes(title=f'key[key['Identifier']==variable3_id]['Questions'].values[0]')
 		fig4.update_layout(legend_title=f'key[key['Identifier']==variable4_id]['Questions'].values[0]')
