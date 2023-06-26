@@ -236,20 +236,20 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
 		# Bar Plot
-		temp = score[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience',variable3_id]]
+		temp = score[[variable3_id,'IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 		# temp = results.join(totals).fillna('')
-		st.write(temp)
+		# st.write(temp)
 		temp = temp.groupby(variable3_id, as_index=False).mean().sort_values(variable1, ascending=False)
 		
 		
-		# if len(score[variable3_id].unique())>10:
-		# 	temp = pd.concat([temp.head(5),temp.tail(5)])
+		if len(score[variable3_id].unique())>10:
+			temp = pd.concat([temp.head(5),temp.tail(5)])
     
-		# fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
-		# if len(score[variable3_id].unique())>10:
-    		# 	fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
-		# else: 
-    		#	fig3.update_layout(title_text=f'{variable1} Scores')
+		fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
+		if len(score[variable3_id].unique())>10:
+    			fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
+		else: 
+    			fig3.update_layout(title_text=f'{variable1} Scores')
 	
 		
 		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar"]) # "Violin"
@@ -258,7 +258,7 @@ if 'results' in locals() and 'key' in locals():
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
 		with tab3:
-			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
+			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
 	
 	else:
 		st.write("Please select all variables")
