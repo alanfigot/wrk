@@ -218,12 +218,12 @@ if 'results' in locals() and 'key' in locals():
 
 	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
+	
 	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
-	variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
+	variable3_id = ''
+	if variable3 != '':
+		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
 
-	while variable1 == '' or variable2 != '' or variable3 != '':
-		st.write("Please select variables.")
-		
 	if variable1 != '' and variable2 != '' and variable3 != '': 		
 		
 		# Scatter
