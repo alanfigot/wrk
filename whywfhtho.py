@@ -225,12 +225,13 @@ if 'results' in locals() and 'key' in locals():
 	button = st.button("Refresh Plot")
 
 	def refresh_plot():
-		if variable3 != '': 
+		if variable1 != '' and variable2 != '' and variable3 != '': 
 			fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
-		else:
+			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+		elif ariable1 != '' and variable2 != '':
 			fig = px.scatter(score, x=variable1, y=variable2)
 			# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 		else:
 			pass
 
