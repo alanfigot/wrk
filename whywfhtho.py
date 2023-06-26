@@ -226,7 +226,7 @@ if 'results' in locals() and 'key' in locals():
 
 	def refresh_plot():
 		if variable1 != '' and variable2 != '' and variable3 != '': 
-			fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
+			fig = px.scatter(score, x=variable1, y=variable2, color=identifier) 
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 		elif variable1 != '' and variable2 != '':
 			fig = px.scatter(score, x=variable1, y=variable2)
