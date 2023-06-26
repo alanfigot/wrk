@@ -226,9 +226,6 @@ if 'results' in locals() and 'key' in locals():
 
 	button = st.button('Refresh Plot')
 
-	if button():
-		refresh_plot()
-
 	def refresh_plot():
 		
 		if graphic == "Scatter":
@@ -240,6 +237,9 @@ if 'results' in locals() and 'key' in locals():
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 		else:
 			pass
+
+	if button():
+		refresh_plot()
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
