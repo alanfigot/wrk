@@ -219,7 +219,7 @@ if 'results' in locals() and 'key' in locals():
 	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	
-	variable3 = st.selectbox('Color by',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
+	variable3 = st.selectbox('Category / Color By',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
 	variable3_id = ''
 	if variable3 != '':
 		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
@@ -249,15 +249,34 @@ if 'results' in locals() and 'key' in locals():
     			fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
 		else: 
     			fig3.update_layout(title_text=f'{variable1} Scores')
-	
+
+		# Violin Plot 
+		if len(score[variable3_id].unique())>10:
+			list_a = list(score.groupby(variable3_id).mean().sort_values(variable1).head(5).index.values)
+		    	list_b = list(score.groupby(variable3_id).mean().sort_values(variable1).tail(5).index.values)
+		    	list_c = list_a + list_b
+		    	temp = score[score[variable3_id].isin(list_c)]
+		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all")
+		else:
+		    	temp = score
+		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all") # color=sub_category 
 		
-		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar"]) # "Violin"
+		fig.update_layout(title_text=f'{value} Score')
+		fig.update_xaxes(title=key[key['Identifier']==category]['Questions'].values[0]) # ticklabelposition="inside top", 
+		fig.update_layout(legend_title=key[key['Identifier']==sub_category]['Questions'].values[0])
+		
+		fig.show()
+			
+				
+		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Violin"]) # "Violin"
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
 		with tab3:
 			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
+		with tab4:
+			st.plotly_chart(fig4, theme='streamlit', use_container_width=True)
 	
 	else:
 		st.write("Please select all variables")
