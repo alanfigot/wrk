@@ -211,25 +211,25 @@ if 'results' in locals() and 'key' in locals():
 		('Scatter', 'Bar', 'Distribution', 'Box'))
 
 	st.write(graphic)
+	if graphic == 'Scatter":
 
-	score = labels.join(totals)
-	score.fillna('', inplace=True)
-
-	x_axis = 'IC'
-	y_axis = 'Teamwork'
-	split_by = 'P5'
-	color_by = 'SU'
-	size_by = 'P3'
+		score = labels.join(totals)
+		score.fillna('', inplace=True)
 	
-	fig = px.scatter(score, x=x_axis, y=y_axis, color=color_by, facet_col=split_by)
-	fig.update_traces(marker=dict(size=results[size_by]*2,
-	                              line=dict(width=0,
-	                                        color='DarkSlateGrey')),
-	                  selector=dict(mode='markers'))
-	
-	fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-	
-	st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+		x_axis = 'IC'
+		y_axis = 'Teamwork'
+		split_by = 'P5'
+		color_by = 'SU'
+		size_by = 'P3'
+		
+		fig = px.scatter(score, x=x_axis, y=y_axis, color=color_by, facet_col=split_by)
+		fig.update_traces(marker=dict(size=results[size_by]*2,
+		                              line=dict(width=0,
+		                                        color='DarkSlateGrey')),
+		                  selector=dict(mode='markers'))
+		fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
+		
+		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
