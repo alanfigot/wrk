@@ -215,6 +215,7 @@ if 'results' in locals() and 'key' in locals():
 
 		score = labels.join(totals)
 		score.fillna('', inplace=True)
+		st.write(score)
 	
 		x_axis = 'IC'
 		y_axis = 'Teamwork'
