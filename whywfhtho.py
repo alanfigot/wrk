@@ -47,35 +47,24 @@ for uploaded_file in uploaded_files:
 			else:
 				labels = df
 
-if 'key' in locals() and 'labels' in locals() and'results' not in locals():
-	st.subheader(':blue[_Score Key_]')
-	st.write(key) 
-	st.subheader(':blue[_Labels_]')
-	st.write(labels) 
-	st.write("Please upload Survey Value Responses")
+# Show which files exist
+if 'key' in locals() and 'labels' in locals() and 'results' in locals():
+	continue
 
-# Process the uploaded files
+elif 'key' in locals() and 'results' in locals() and 'labels' not in locals():
+	st.write("Please remember to upload Survey Label Responses")
+	continue
+
 elif 'key' in locals() and 'results' not in locals():
-	st.subheader(':blue[_Score Key_]')
-	st.write(key, "Please upload Survey Value Responses")
-	
-# Process the uploaded files
-elif 'results' in locals() and 'labels' in locals() and 'key' not in locals():
-        st.subheader(':blue[_Survey Responses_]')
-        st.write(results)
-	st.subheader(':blue[_Survey Labels_]')
-        st.write(labels, "Please upload Survey Score Key")
-
-# Process the uploaded files
-elif 'results' in locals() and 'key' not in locals():
-        st.subheader(':blue[_Survey Responses_]')
-        st.write(results, "Please upload Survey Score Key")
-
-elif 'results' and 'key' in locals():
 	st.subheader(':blue[_Survey Score Key_]')
-	st.write(key)
+	st.write(key, "Please upload Survey Value Responses")
+
+elif 'key' not in locals() and 'results' in locals():
+	st.subheader(':blue[_Survey Value Responses_]')
+	st.write(results, "Please upload Survey Score Key")
 	
-	st.subheader(':blue[_Survey Responses_]')
+if 'results' and 'key' in locals():
+
 	results = results.filter(regex='^P')
 	# Convert columns to numeric, dropping the ones that cannot be converted
 	numeric_columns = []
@@ -88,7 +77,6 @@ elif 'results' and 'key' in locals():
 
 	# Create a new DataFrame with the numeric columns
 	results = results[numeric_columns]
-	st.write(results)
 	
 	# Create new columns for scores 
 	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
