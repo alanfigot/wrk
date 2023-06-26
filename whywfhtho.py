@@ -218,11 +218,11 @@ if 'results' in locals() and 'key' in locals():
 		"Select one of the following options:",
 		('Scatter', 'Bar', 'Distribution', 'Box'))
 	
-		variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
-		variable3 = st.selectbox('Variable 3',[''] + key['Questions'].values)
-		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
-		# size_by = st.selectbox('Dimension',score.columns)
+	variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+	variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+	variable3 = st.selectbox('Variable 3',[''] + key['Questions'].values)
+	identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
+	# size_by = st.selectbox('Dimension',score.columns)
 
 	button = st.button('Refresh Plot')
 
