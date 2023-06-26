@@ -239,8 +239,8 @@ if 'results' in locals() and 'key' in locals():
 		else:
 			pass
 	
-	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot)
-	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot)
+	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
+	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
 	variable3 = ''
 
 	if graphic != "Bar":
@@ -251,7 +251,7 @@ if 'results' in locals() and 'key' in locals():
 	button = st.button("Refresh Plot")
 
 	if button:
-		refresh_plot(variable1, variable2, variable3)
+		refresh_plot(graphic, variable1, variable2, variable3)
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
