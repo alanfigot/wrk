@@ -232,7 +232,7 @@ if 'results' in locals() and 'key' in locals():
 			with tab2:
 				st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
 		else: 
-			pass 
+			st.write("Please select all three variables before refreshing the graphs.")
 
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot) # on_change=refresh_plot
@@ -241,17 +241,6 @@ if 'results' in locals() and 'key' in locals():
 	if variable3 != '':
 		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
 	
-	# def refresh_plot(score, variable1, variable2, variable3):
-	#	if variable1 != '' and variable2 != '' and variable3 != '': 
-	#		fig = px.scatter(score, x=variable1, y=variable2, color=identifier) 
-	#		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
-	#	elif variable1 != '' and variable2 != '':
-	#		fig = px.scatter(score, x=variable1, y=variable2)
-	#		# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-	#		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
-	#	else:
-	#		pass
-
 	button = st.button("Refresh Plot")
 
 	#if button:
