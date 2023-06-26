@@ -223,13 +223,11 @@ if 'results' in locals() and 'key' in locals():
 	variable3_id = ''
 	if variable3 != '':
 		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
-		st.write(variable3_id)
 
 	variable4 = st.selectbox('Sub-Category',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
 	variable4_id = ''
 	if variable4 != '':
 		variable4_id = key[key['Filter']==variable4]['Identifier'].values[0]
-		st.write(variable4_id)
 
 	if variable1 != '' and variable2 != '' and variable3 != '': 		
 		
@@ -269,8 +267,8 @@ if 'results' in locals() and 'key' in locals():
 				fig4 = px.box(temp, x=variable3_id, y = variable1, points="all", color=variable4_id)
 			
 		fig4.update_layout(title_text = f'{variable1} Score')
-		# fig4.update_xaxes(title = f'{key[key['Identifier']==variable3_id]['Questions'].values[0]}')
-		# fig4.update_layout(legend_title= f'{key[key['Identifier']==variable4_id]['Questions'].values[0]}')
+		fig4.update_xaxes(title = variable3)
+		fig4.update_layout(legend_title= variable4)
 				
 		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Violin"]) # "Violin"
 		with tab1:
