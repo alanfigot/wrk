@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 import re
 import openpyxl 
+import plotly.express as px
 
 """
 # Persona Development  
