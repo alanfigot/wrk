@@ -225,6 +225,12 @@ if 'results' in locals() and 'key' in locals():
 		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
 		st.write(variable3_id)
 
+	variable4 = st.selectbox('Sub-Category',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
+	variable4_id = ''
+	if variable4 != '':
+		variable4_id = key[key['Filter']==variable3]['Identifier'].values[0]
+		st.write(variable4_id)
+
 	if variable1 != '' and variable2 != '' and variable3 != '': 		
 		
 		# Scatter
@@ -258,12 +264,13 @@ if 'results' in locals() and 'key' in locals():
 			temp = score[score[variable3_id].isin(list_c)]
 			fig4 = px.box(temp, x=variable3_id, y = variable1, points="all")
 		else:
-		    	temp = score
-		    	fig4 = px.box(temp, x=variable3_id, y = variable1, points="all") # color=sub_category 
+			if variable4_id != '':
+		    		temp = score
+		    		fig4 = px.box(temp, x=variable3_id, y = variable1, points="all", color=variable4_id)
 		
-		# fig4.update_layout(title_text=f'{value} Score')
-		# fig4.update_xaxes(title=key[key['Identifier']==category]['Questions'].values[0]) # ticklabelposition="inside top", 
-		# fig4.update_layout(legend_title=key[key['Identifier']==sub_category]['Questions'].values[0])
+		fig4.update_layout(title_text=f'{variable1} Score')
+		fig4.update_xaxes(title=key[key['Identifier']==variable3_id]['Questions'].values[0])
+		fig4.update_layout(legend_title=key[key['Identifier']==variable4_id]['Questions'].values[0])
 				
 		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Violin"]) # "Violin"
 		with tab1:
