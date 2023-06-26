@@ -223,6 +223,7 @@ if 'results' in locals() and 'key' in locals():
 	variable3_id = ''
 	if variable3 != '':
 		variable3_id = key[key['Filter']==variable3]['Identifier'].values[0]
+		st.write(variable3_id)
 
 	if variable1 != '' and variable2 != '' and variable3 != '': 		
 		
