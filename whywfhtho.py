@@ -238,7 +238,7 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
 		
 	if variable1 != '' and variable2 != '':
-		tab1, tab2 = st.tabs(["Scatter", "Distribution", "Bar", "Violin"])
+		tab1, tab2 = st.tabs(["Scatter", "Distribution"]) # "Bar", "Violin"
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
