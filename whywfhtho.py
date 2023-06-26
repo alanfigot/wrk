@@ -236,7 +236,8 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
 		# Bar Plot
-		temp = results.join(totals).fillna('')
+		temp = score[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience',variable3_id]]
+		# temp = results.join(totals).fillna('')
 		st.write(temp)
 		temp = temp.groupby(variable3_id, as_index=False).mean().sort_values(variable1, ascending=False)
 		
