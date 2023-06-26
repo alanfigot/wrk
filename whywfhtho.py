@@ -223,8 +223,8 @@ if 'results' in locals() and 'key' in locals():
 	st.write(graphic)
 	if graphic == "Scatter":
 	
-		x_axis = st.selectbox('Dimension',('IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'))
-		y_axis = st.selectbox('Dimension',('IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'))
+		x_axis = st.selectbox('Dimension',['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
+		y_axis = st.selectbox('Dimension',['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 		color_by = st.selectbox('Dimension',score.columns)
 		size_by = st.selectbox('Dimension',score.columns)
 		
