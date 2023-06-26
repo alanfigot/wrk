@@ -214,27 +214,23 @@ if 'results' in locals() and 'key' in locals():
 		score = results.join(totals)
 		score.fillna('', inplace=True)
 
-	graphic = st.radio(
-		"Select one of the following options:",
-		('Scatter', 'Bar', 'Distribution', 'Box'))
+	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 	
 	variable1 = st.selectbox("Variable 1",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 	variable2 = st.selectbox("Variable 2",['','IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])
 	variable3 = st.selectbox('Variable 3',[''] + key['Questions'].values)
-	identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
-	# size_by = st.selectbox('Dimension',score.columns)
+	if variable != '':
+		identifier = key.loc[key['Questions']=='Please select your business unit.']['Identifier'].values[0]
 
-	button = st.button('Refresh Plot')
+	button = st.button("Refresh Plot")
 
 	def refresh_plot():
-		
-		if graphic == "Scatter":
-			if variable3 != '': 
-				fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
-			else:
-				fig = px.scatter(score, x=variable1, y=variable2)
+		if variable3 != '': 
+			fig = px.scatter(score, x=variable1, y=variable2, color=variable3) 
+		else:
+			fig = px.scatter(score, x=variable1, y=variable2)
 			# fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
-			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
+		st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 		else:
 			pass
 
