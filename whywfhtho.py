@@ -249,7 +249,6 @@ if 'results' in locals() and 'key' in locals():
 	fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
 	fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
 	
-	else if variable1 != '' or variable2!= '':
 		
 	if variable1 != '' and variable2 != '' and variable3 != '':
 		tab1, tab2, tab3 = st.tabs(["Scatter", "Distribution", "Bar"]) # "Violin"
