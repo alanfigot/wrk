@@ -185,14 +185,8 @@ if 'results' in locals() and 'key' in locals():
 
 	st.subheader(':blue[_Analysis Results_] :sunglasses:')
 	st.write(totals.style.format("{:.2}"))
-	st.write("Make sure all scores are between 0 and 1")
+	st.write("Make sure all scores in the table above are between 0 and 1")
 
-	graphic = st.radio(
-		"Select one of the following options:",
-		('Scatter', 'Bar', 'Distribution', 'Box'))
-
-	st.write(graphic)
-		
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
@@ -209,8 +203,37 @@ if 'results' in locals() and 'key' in locals():
 			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
 			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
+	
+	st.subheader(':blue[_Data Visualization_] ')
+	
+	graphic = st.radio(
+		"Select one of the following options:",
+		('Scatter', 'Bar', 'Distribution', 'Box'))
+
+	st.write(graphic)
+
+	score = labels.join(totals)
+	score.fillna('', inplace=True)
+
+	x_axis = 'IC'
+	y_axis = 'Teamwork'
+	split_by = 'P5'
+	color_by = 'SU'
+	size_by = 'P3'
+	
+	fig = px.scatter(score, x=x_axis, y=y_axis, color=color_by, facet_col=split_by)
+	fig.update_traces(marker=dict(size=results[size_by]*2,
+	                              line=dict(width=0,
+	                                        color='DarkSlateGrey')),
+	                  selector=dict(mode='markers'))
+	
+	fig.update_layout(title_text=f'{x_axis} Score by {y_axis}')
+	
+	st.plotly_chart(fig, theme='streamlit', use_container_width=True)
 
 	# Download Options
+	st.subheader(':blue[_Download Data_] ')
+	
 	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
 	download_df = totals
 	btn =  "Download Individual Scores"
