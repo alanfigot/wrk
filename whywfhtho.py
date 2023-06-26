@@ -50,7 +50,14 @@ for uploaded_file in uploaded_files:
 # Process the uploaded files
 if 'key' in locals() and 'results' not in locals():
 	st.subheader(':blue[_Score Key_]')
-	st.write(key, "Please upload Survey Responses")
+	st.write(key, "Please upload Survey Value Responses")
+
+if 'key' in locals() and 'labels' in locals() and'results' not in locals():
+	st.subheader(':blue[_Score Key_]')
+	st.write(key) 
+	st.subheader(':blue[_Labels_]')
+	st.write(labels) 
+	st.write("Please upload Survey Value Responses")
 	
 # Process the uploaded files
 elif 'results' in locals() and 'key' not in locals():
