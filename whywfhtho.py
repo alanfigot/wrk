@@ -216,7 +216,7 @@ if 'results' in locals() and 'key' in locals():
 
 	graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	def refresh_plot():
+	def refresh_plot(graphic, variable1, variable2, variable3):
 		if graphic == "Scatter":
 			scatter_plot()
 		elif graphic == "Bar":
@@ -228,7 +228,7 @@ if 'results' in locals() and 'key' in locals():
 		else:
 			pass
 
-	def scatter_plot():
+	def scatter_plot(variable1, variable2, variable3):
 		if variable1 != '' and variable2 != '' and variable3 != '': 
 			fig = px.scatter(score, x=variable1, y=variable2, color=identifier) 
 			st.plotly_chart(fig, theme='streamlit', use_container_width=True)
@@ -241,6 +241,7 @@ if 'results' in locals() and 'key' in locals():
 	
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot)
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']), on_change=refresh_plot)
+	variable3 = ''
 
 	if graphic != "Bar":
 		variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)), on_change=refresh_plot)
@@ -250,7 +251,7 @@ if 'results' in locals() and 'key' in locals():
 	button = st.button("Refresh Plot")
 
 	if button:
-		refresh_plot()
+		refresh_plot(variable1, variable2, variable3)
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
