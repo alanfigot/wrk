@@ -71,7 +71,7 @@ elif 'key' not in locals() and 'results' in locals():
 		st.write(labels)
 	st.write("Please upload Survey Score Key")
 
-elif 'key' not in locals() and 'results' not in locals() 'labels' in locals():
+elif 'key' not in locals() and 'results' not in locals() and 'labels' in locals():
 	st.subheader(':blue[_Survey Label Responses_]')
 	st.write(labels)
 	st.write("Please upload Survey Score Key and Survey Value Responses")
