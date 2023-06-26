@@ -218,22 +218,26 @@ if 'results' in locals() and 'key' in locals():
 
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
-
-	filter_by = st.selectbox("Category",list(key[key['Filter']!='']['Filter'].unique()))
 	
 	variable3 = st.selectbox('Color by',list([''] + list(key['Questions'].values)))
-	identifier = ''
+	identifier2 = ''
 	if variable3 != '':
-		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
+		identifier2 = key[key['Questions']==variable3]['Identifier'].values[0]
+
+	filter_by = st.selectbox("Category",list(key[key['Filter']!='']['Filter'].unique()))
+		identifier1 = ''
+		if filter_by != '':
+			identifier1 = key[key['Filter']==filter_by]['Identifier'].values[0]
+
 	
-	if variable1 != '' and variable2 != '': 		
+	if variable1 != '' and variable2 != '' and filter_by != '': 		
 		if variable3 != '': 
 			
 			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier)
 			
 			fig2 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
 			
-			temp = score.groupby(variable3).mean().sort_values(variable1, ascending=False)
+			temp = score.groupby(filter_by).mean().sort_values(variable1, ascending=False)
 			fig3 = px.bar(temp, y= variable1, barmode='group')
 			
 			fig4 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
@@ -242,9 +246,6 @@ if 'results' in locals() and 'key' in locals():
 			# Scatter
 			fig1 = px.scatter(score, x=variable1, y=variable2) 
 			
-			# Histogram
-			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
-
 			# Histogram
 			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
 			
