@@ -224,19 +224,26 @@ if 'results' in locals() and 'key' in locals():
 	if variable3 != '':
 		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
 	
-	if variable1 != '' and variable2 != '' and variable3 != '': 
-		#figure1
-		fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier)
-		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
-		fig2 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
-		fig3 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
-		fig4 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
+	if variable1 != '' and variable2 != '': 
 
-	elif variable1 != '' and variable2 != '':
 		fig1 = px.scatter(score, x=variable1, y=variable2) 
 		fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
 		fig3 = px.histogram(score, x=variable1, hover_data=score.columns)
 		fig4 = px.histogram(score, x=variable1, hover_data=score.columns)
+
+			
+		if variable3 != '': 
+			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier)
+			fig2 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
+			fig3 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
+			fig4 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
+			
+
+		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
+		fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
+		fig3.update_layout(title_text=f'{variable1} Score by {variable2}')
+		fig4.update_layout(title_text=f'{variable1} Score by {variable2}')
+		
 
 	if variable1 != '' and variable2 != '':
 		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar", "Violin"])
@@ -250,7 +257,6 @@ if 'results' in locals() and 'key' in locals():
 			st.plotly_chart(fig4, theme='streamlit', use_container_width=True)
 	else: 
 		st.write("Please select variables.")
-	
 
 	# Download Options
 	st.subheader(':blue[_Download Data_] ')
