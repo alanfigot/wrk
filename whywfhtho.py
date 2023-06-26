@@ -211,7 +211,7 @@ if 'results' in locals() and 'key' in locals():
 		('Scatter', 'Bar', 'Distribution', 'Box'))
 
 	st.write(graphic)
-	if graphic == 'Scatter":
+	if graphic == "Scatter":
 
 		score = labels.join(totals)
 		score.fillna('', inplace=True)
