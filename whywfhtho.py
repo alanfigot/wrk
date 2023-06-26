@@ -235,7 +235,7 @@ if 'results' in locals() and 'key' in locals():
 		else:
 			pass
 
-	if button():
+	if button:
 		refresh_plot()
 
 	# Download Options
