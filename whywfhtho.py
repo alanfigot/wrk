@@ -218,9 +218,9 @@ if 'results' in locals() and 'key' in locals():
 
 	variable1 = st.selectbox("Variable 1",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) # on_change=refresh_plot
-	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)) # , on_change=refresh_plot)
-	identifier = ""
-	if variable3 != "":
+	variable3 = st.selectbox('Variable 3',list([''] + list(key['Questions'].values)))
+	identifier = ''
+	if variable3 != '':
 		identifier = key[key['Questions']=='Please select your generation.']['Identifier'].values[0]
 
 	fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier) 
