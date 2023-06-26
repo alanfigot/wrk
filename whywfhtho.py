@@ -225,9 +225,9 @@ if 'results' in locals() and 'key' in locals():
 		identifier2 = key[key['Questions']==variable3]['Identifier'].values[0]
 
 	filter_by = st.selectbox("Category",list(key[key['Filter']!='']['Filter'].unique()))
-		identifier1 = ''
-		if filter_by != '':
-			identifier1 = key[key['Filter']==filter_by]['Identifier'].values[0]
+	identifier1 = ''
+	if filter_by != '':
+		identifier1 = key[key['Filter']==filter_by]['Identifier'].values[0]
 
 	
 	if variable1 != '' and variable2 != '' and filter_by != '': 		
