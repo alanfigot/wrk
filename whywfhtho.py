@@ -236,7 +236,7 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
 		# Bar Plot
-		temp = score[[column for column in score.columns if pd.api.types.is_numeric_dtype(score[column])]]
+		temp = results.join(totals).fillna('', inplace=True)
 		temp = temp.groupby(variable3_id, as_index=False).mean().sort_values(variable1, ascending=False)
 		st.write(temp)
 		
