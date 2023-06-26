@@ -207,8 +207,12 @@ if 'results' in locals() and 'key' in locals():
 	
 	st.subheader(':blue[_Data Visualization_] ')
 
-	score = results.join(totals)
-	score.fillna('', inplace=True)
+	if 'labels' in locals():
+		score = labels.join(totals)
+		score.fillna('', inplace=True)
+	else: 
+		score = results.join(totals)
+		score.fillna('', inplace=True)
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
@@ -216,53 +220,29 @@ if 'results' in locals() and 'key' in locals():
 	variable2 = st.selectbox("Variable 2",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
 	
 	variable3 = st.selectbox('Color by',list([''] + list(key['Questions'].values)))
-	identifier1 = ''
+	variable3_id = ''
 	if variable3 != '':
-		identifier1 = key[key['Questions']==variable3]['Identifier'].values[0]
-
-	filter_by = st.selectbox("Category",list(key[key['Filter']!='']['Filter'].unique()))
-	identifier2 = ''
-	if filter_by != '':
-		identifier2 = key[key['Filter']==filter_by]['Identifier'].values[0]
-
+		variable3_id = key[key['Questions']==variable3]['Identifier'].values[0]
 	
-	if variable1 != '' and variable2 != '' and filter_by != '': 		
+	if variable1 != '' and variable2 != '': 		
 		if variable3 != '': 
-			
-			fig1 = px.scatter(score, x=variable1, y=variable2, color=identifier1)
-			
-			fig2 = px.histogram(score, x=variable1, color=identifier1, hover_data=score.columns)
-			
-			temp = score.groupby(identifier2).mean().sort_values(variable1, ascending=False)
-			fig3 = px.bar(temp, y= variable1, barmode='group')
-			
-			fig4 = px.histogram(score, x=variable1, color=variable3, hover_data=score.columns)
-
+			fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
+			fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
 		else: 
 			# Scatter
 			fig1 = px.scatter(score, x=variable1, y=variable2) 
-			
 			# Histogram
 			fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
-			
-			fig4 = px.histogram(score, x=variable1, hover_data=score.columns)
 
 		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
 		fig2.update_layout(title_text=f'{variable1} Score by {variable2}')
-		fig3.update_layout(title_text=f'{variable1} Score by {variable2}')
-		fig4.update_layout(title_text=f'{variable1} Score by {variable2}')
 		
-
 	if variable1 != '' and variable2 != '':
-		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar", "Violin"])
+		tab1, tab2 = st.tabs(["Scatter", "Distribution", "Bar", "Violin"])
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
 			st.plotly_chart(fig2, theme='streamlit', use_container_width=True)
-		with tab3:
-			st.plotly_chart(fig3, theme='streamlit', use_container_width=True)
-		with tab4:
-			st.plotly_chart(fig4, theme='streamlit', use_container_width=True)
 	else: 
 		st.write("Please select variables.")
 
