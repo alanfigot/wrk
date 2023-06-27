@@ -233,7 +233,7 @@ if 'results' in locals() and 'key' in locals():
 		
 		# Scatter
 		fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
-		fig1.update_layout(title_text=f'{variable1} Score by {variable2}')
+		fig1.update_layout(title_text=f'{variable1} Score vs. {variable2} Score')
 
 		# Distribution 
 		fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
@@ -253,6 +253,9 @@ if 'results' in locals() and 'key' in locals():
     			fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
 		else: 
     			fig3.update_layout(title_text=f'{variable1} Scores')
+
+		fig3.update_xaxes(title = variable3)
+		fig3.update_layout(legend_title= 'Personality Scales')
 
 		# Violin Plot 
 		if len(score[variable3_id].unique())>10:
