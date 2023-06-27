@@ -229,20 +229,18 @@ if 'results' in locals() and 'key' in locals():
 	if variable4 != '':
 		variable4_id = key[key['Filter']==variable4]['Identifier'].values[0]
 
-	if variable1 != '' and variable2 != '' and variable3 != '': 		
+	if variable1 != '' and variable2 != '' and variable3 != '' and variable4 !='': 		
 		
-		# Scatter
+		# FIG 1 Scatter
 		fig1 = px.scatter(score, x=variable1, y=variable2, color=variable3_id)
 		fig1.update_layout(title_text=f'{variable1} Score vs. {variable2} Score')
 
-		# Distribution 
+		# FIG 2 Distribution 
 		fig2 = px.histogram(score, x=variable1, color=variable3_id, hover_data=score.columns)
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
-		# Bar Plot
+		# FIG 3 Bar Plot
 		temp = score[[variable3_id,'IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
-		# temp = results.join(totals).fillna('')
-		# st.write(temp)
 		temp = temp.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
 		
 		if len(score[variable3_id].unique())>10:
@@ -257,7 +255,7 @@ if 'results' in locals() and 'key' in locals():
 		fig3.update_xaxes(title = variable3)
 		fig3.update_layout(legend_title= 'Personality Scales')
 
-		# Violin Plot 
+		# FIG 4 Violin Plot 
 		if len(score[variable3_id].unique())>10:
 			list_a = list(score.groupby(variable3_id).mean().sort_values(variable1).head(5).index.values)
 			list_b = list(score.groupby(variable3_id).mean().sort_values(variable1).tail(5).index.values)
