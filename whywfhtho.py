@@ -205,7 +205,7 @@ if 'results' in locals() and 'key' in locals():
 			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
 	
-	st.subheader(':blue[_Data Visualization_] ')
+	# Join data frames 
 
 	if 'labels' in locals():
 		score = labels.join(totals)
@@ -213,6 +213,28 @@ if 'results' in locals() and 'key' in locals():
 	else: 
 		score = results.join(totals)
 		score.fillna('', inplace=True)
+
+	# Download Options
+	st.subheader(':blue[_Download Data_] ')
+
+	selected_file = st.radio("Select file to download",('Individual Scores','Group Scores'))
+	# selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
+	
+	download_df = score
+	
+	btn =  "Download Individual Scores"
+	if selected_file == 'Group Scores':
+		download_df = filtered_results
+		btn =  f"Download Scores by {selected_filter}" 
+	
+	st.download_button(
+		label = btn, 
+		data = download_df.to_csv().encode('utf-8'), 
+		file_name= "totals.csv",
+		mime="text/csv",
+		key='download-csv')
+
+	st.subheader(':blue[_Data Visualization_] ')
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
@@ -255,7 +277,7 @@ if 'results' in locals() and 'key' in locals():
 		fig3.update_xaxes(title = variable3)
 		fig3.update_layout(legend_title= 'Personality Scales')
 
-		# FIG 4 Violin Plot 
+		# FIG 4 Box Plot 
 		if len(score[variable3_id].unique())>10:
 			list_a = list(score.groupby(variable3_id).mean().sort_values(variable1).head(5).index.values)
 			list_b = list(score.groupby(variable3_id).mean().sort_values(variable1).tail(5).index.values)
@@ -271,7 +293,7 @@ if 'results' in locals() and 'key' in locals():
 		fig4.update_xaxes(title = variable3)
 		fig4.update_layout(legend_title= variable4)
 				
-		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Violin"]) # "Violin"
+		tab1, tab2, tab3, tab4 = st.tabs(["Scatter", "Distribution", "Bar Chart", "Box"]) 
 		with tab1:
 			st.plotly_chart(fig1, theme='streamlit', use_container_width=True)
 		with tab2:
@@ -292,22 +314,5 @@ if 'results' in locals() and 'key' in locals():
 	#		# Histogram
 	#		fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
 
-
-	# Download Options
-	st.subheader(':blue[_Download Data_] ')
-	
-	selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
-	download_df = totals
-	btn =  "Download Individual Scores"
-	if selected_file == 'Group Scores':
-		download_df = filtered_results
-		btn =  f"Download Scores by {selected_filter}" 
-	
-	st.download_button(
-		label = btn, 
-		data = download_df.to_csv().encode('utf-8'), 
-		file_name= "totals.csv",
-		mime="text/csv",
-		key='download-csv')
 else:
     placeholder.text("Please upload the necessary files")
