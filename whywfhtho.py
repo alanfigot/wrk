@@ -227,7 +227,7 @@ if 'results' in locals() and 'key' in locals():
 	if selected_file == 'Group Scores':
 		download_df = filtered_results
 		btn =  f"Download Scores by {selected_filter}" 
-		download_filename = selected_file + "by" + selected_filter
+		download_filename = selected_file + " by " + selected_filter
 
 	st.download_button(
 		label = btn, 
