@@ -92,7 +92,7 @@ if 'results' in locals() and 'key' in locals():
 	results = results[numeric_columns]
 	
 	# Create new columns for scores 
-	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
+	totals = pd.DataFrame(columns=['IC','SU','DQ','NP','LM','Teamwork','Functionality','Exposure','Experience'])
 	# len(results.index)
 	
 	# Calculate Scores 
@@ -124,12 +124,12 @@ if 'results' in locals() and 'key' in locals():
 
 	# Max Possible 
 	max_out = key.copy()
-	for dimension in ['IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
+	for dimension in ['IC', 'SU','DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']:
 		for condition, column in {'Max': 'Max', 'Min': 'Min'}.items():
 			mask = max_out[dimension] == condition
 			max_out.loc[mask, dimension] = max_out.loc[mask, column]
 		
-	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+	max_out = max_out[['Identifier','IC', 'SU','DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']]
 	max_out.set_index('Identifier', inplace=True)
 	max_out = max_out.transpose()
 	
@@ -148,7 +148,7 @@ if 'results' in locals() and 'key' in locals():
 	max_out.replace('', np.nan, inplace=True)  # Replace empty strings with NaN values
 	max_out.dropna(axis=1, how='all', inplace=True)
 	
-	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP','Teamwork','Functionality','Exposure','Experience'])
+	max_totals = pd.DataFrame(columns=['IC','SU','DQ','NP', 'LM', 'Teamwork','Functionality','Exposure','Experience'])
 	
 	valid_columns = key['Identifier'].unique()
 
@@ -178,9 +178,9 @@ if 'results' in locals() and 'key' in locals():
 
 		max_totals[dimension] = temp_results.sum(axis=1)
 	
-	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+	max_totals = max_totals[['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']]
 
-	for col in ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']:
+	for col in ['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']:
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
@@ -202,7 +202,7 @@ if 'results' in locals() and 'key' in locals():
 			st.write(filtered_results.style.format("{:.2}"))
 		elif 'results' in locals(): 
 			filtered_results = results.join(totals).groupby(selected_filter_id).mean()
-			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+			filtered_results = filtered_results[['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']]
 			st.write(filtered_results.style.format("{:.2}"))
 	
 	# Join data frames 
@@ -240,8 +240,8 @@ if 'results' in locals() and 'key' in locals():
 
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
-	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience'])) 
-	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']))
+	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience'])) 
+	variable2 = st.selectbox("Secondary Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']))
 	
 	variable3 = st.selectbox('Category / Color By',list([''] + [x for x in key['Filter'].unique() if x not in [np.nan]]))
 	variable3_id = ''
@@ -264,13 +264,13 @@ if 'results' in locals() and 'key' in locals():
 		fig2.update_layout(title_text=f'{variable1} Color by {variable3}')
 
 		# FIG 3 Bar Plot
-		temp = score[[variable3_id,'IC', 'SU', 'DQ', 'NP', 'Teamwork','Functionality','Exposure','Experience']]
+		temp = score[[variable3_id,'IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience']]
 		temp = temp.groupby(variable3_id).mean().sort_values(variable1, ascending=False)
 		
 		if len(score[variable3_id].unique())>10:
 			temp = pd.concat([temp.head(5),temp.tail(5)])
     
-		fig3 = px.bar(temp, y = ['IC','SU','NP','DQ'], barmode='group')
+		fig3 = px.bar(temp, y = ['IC','SU','NP','DQ','LM'], barmode='group')
 		if len(score[variable3_id].unique())>10:
     			fig3.update_layout(title_text=f"{variable1} Scores <br> <sup >Note that categories have been reduced to top 5 and bottom 5 {variable1} scored by {variable3} </sup>") 
 		else: 
