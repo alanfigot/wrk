@@ -221,16 +221,18 @@ if 'results' in locals() and 'key' in locals():
 	# selected_file = st.selectbox("Select file to download", ['Individual Scores','Group Scores'])
 	
 	download_df = score
+	download_filename = selected_file
 	
 	btn =  "Download Individual Scores"
 	if selected_file == 'Group Scores':
 		download_df = filtered_results
 		btn =  f"Download Scores by {selected_filter}" 
-	
+		download_filename = selected_file + "by" + selected_filter
+
 	st.download_button(
 		label = btn, 
 		data = download_df.to_csv().encode('utf-8'), 
-		file_name= "totals.csv",
+		file_name= download_filename + ".csv",
 		mime="text/csv",
 		key='download-csv')
 
