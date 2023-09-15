@@ -185,7 +185,7 @@ if 'results' in locals() and 'key' in locals():
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
-	st.subheader('[_Analysis Results_] :sunglasses:')
+	st.subheader(':blue[_Analysis Results_]')
 	st.write(totals.style.format("{:.2}"))
 	st.write("Make sure all scores in the table above are between 0 and 1")
 
@@ -217,16 +217,16 @@ if 'results' in locals() and 'key' in locals():
 	layout.add_traces(barpolar_plots)
 	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
 	st.write(layout)
-
+	
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
 		filters = [item for item in list(key['Filter'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
 	# else: 
-	#	filters = [item for item in list(key['Identifier'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
-		
+	# filters = [item for item in list(key['Identifier'].unique()) if str(item) not in ['',np.nan,'nan',0,float('NaN')]]
+
 		selected_filter = st.selectbox("Select filter for grouping", filters)
 		selected_filter_id = (key.loc[key['Filter']==selected_filter]['Identifier']).values[0]
-		
+
 		if 'labels' in locals():
 			filtered_results = labels[key[key['Filter']==selected_filter]['Identifier'].values].join(totals).groupby(selected_filter_id).mean()
 			st.write(filtered_results.style.format("{:.2}"))
