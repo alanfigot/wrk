@@ -189,6 +189,33 @@ if 'results' in locals() and 'key' in locals():
 	st.write(totals.style.format("{:.2}"))
 	st.write("Make sure all scores in the table above are between 0 and 1")
 
+	# Attendance Quadrants
+	attendance = {}
+	for i in ['Teamwork','Functionality','Exposure','Experience']:
+		attendance[i] = totals[i].mean()
+	
+	layout1_radius = 10
+	num_slices = 4
+	theta = [45, 135, 225, 315, 0]
+	polar_width = [80,80,80,80, 0]
+	attendance_vals = [i for i in attendance.values()] + [1]
+	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
+	labels = [i for i in attendance.keys()] + ['']
+	
+	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
+	                  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
+	
+	layout1 = go.Figure()
+	
+	layout1.update_layout(template=None,
+	                     polar_radialaxis_showticklabels=False,
+	                     polar_angularaxis_showticklabels=False,
+	                     polar_radialaxis_tickvals = [0, .33, .66],
+	                     polar_angularaxis_tickvals = [90, 180, 270],
+	                    )
+	layout1.add_traces(barpolar_plots)
+	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
+	st.write(layout1)
 
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
