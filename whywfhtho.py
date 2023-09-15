@@ -245,7 +245,12 @@ if 'results' in locals() and 'key' in locals():
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
 
-	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(attendance["Teamwork"],2)}",\n Functionality: {round(attendance["Functionality"],2)})
+	v1 = attendance["Teamwork"]
+	v2 = attendance["Functionality"]
+	v3 = attendance["Exposure"]
+	v4 = attendance["Experience"]
+
+	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(v1,2)}",\n Functionality: {round(v2,2)})
 
 	layout1_radius = 10
 	num_slices = 4
