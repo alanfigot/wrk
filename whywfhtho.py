@@ -245,8 +245,7 @@ if 'results' in locals() and 'key' in locals():
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
 
-	st.write('Average results for each attendance quadrant are Teamwork: {attendance["Teamwork"]}, Functionality: {attendance["Functionality"]}, 
- Exposure: {attendance["Exposure"]}, and Experience {attendance["Experience"]}')
+	st.write('Average results for each attendance quadrant are Teamwork: {attendance["Teamwork"]}, Functionality: {attendance["Functionality"]}, Exposure: {attendance["Exposure"]}, and Experience {attendance["Experience"]}')
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
@@ -260,8 +259,7 @@ if 'results' in locals() and 'key' in locals():
 		
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write('Inputed values for each attendance quadrant are Teamwork: {attendance["Teamwork"]},
-	  Functionality: {attendance["Functionality"]}, Exposure: {attendance["Exposure"]}, and Experience {attendance["Experience"]}')
+       			st.write('Inputed values for each attendance quadrant are Teamwork: {attendance["Teamwork"]}, Functionality: {attendance["Functionality"]}, Exposure: {attendance["Exposure"]}, and Experience {attendance["Experience"]}')
 	
 	layout1_radius = 10
 	num_slices = 4
