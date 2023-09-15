@@ -243,6 +243,27 @@ if 'results' in locals() and 'key' in locals():
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
+		exogenous_features = ['Var1', 'Var2']
+		predict_size = 4
+		                    
+		cols = st.columns(len(exogenous_features))
+		lists = []
+		                
+		for p in range(len(exogenous_features)):
+		    lists.append([])
+		                    
+		for i, c in enumerate(cols):
+		    with c:
+		        for h in range(predict_size):
+		            key = f"number_input_{i}_{h}"
+		            a = st.number_input(exogenous_features[i], key=key)
+		            lists[i].append(a)
+                                
+		df = pd.DataFrame(lists)
+		df = df.transpose()
+		df.columns = exogenous_features
+		st.write(df) 
+		
 		Teamwork = st.number_input('Insert a number')
 		submitted = st.form_submit_button("Submit")
 		if submitted:
