@@ -185,7 +185,7 @@ if 'results' in locals() and 'key' in locals():
 		max_score = max_totals[col][col]
 		totals[col] = totals[col].apply(lambda x: x / max_score)
 
-	st.subheader(':blue[_Analysis Results_] :sunglasses:')
+	st.subheader('[_Analysis Results_] :sunglasses:')
 	st.write(totals.style.format("{:.2}"))
 	st.write("Make sure all scores in the table above are between 0 and 1")
 
@@ -215,6 +215,7 @@ if 'results' in locals() and 'key' in locals():
 	                     polar_angularaxis_tickvals = [90, 180, 270],
 	                    )
 	layout.add_traces(barpolar_plots)
+	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
 	st.write(layout)
 
 	# Create a selectbox widget for column selection
