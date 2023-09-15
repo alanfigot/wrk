@@ -245,14 +245,35 @@ if 'results' in locals() and 'key' in locals():
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
 
-	teamwork = attendance['Teamwork']
+	st.write(f"Average results for each attendance quadrant are 
+ \n Teamwork: {round(attendance["Teamwork"],2)}",
+		     \n Functionality: {round(attendance["Functionality"],2)})
 
-	st.write(f"Average results for each attendance quadrant are Teamwork: {round(teamwork,2)}")
+	layout1_radius = 10
+	num_slices = 4
+	theta = [45, 135, 225, 315, 0]
+	polar_width = [80,80,80,80, 0]
+	attendance_vals = [i for i in attendance.values()] + [1]
+	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
+	labels = [i for i in attendance.keys()] + ['']
+	
+	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
+			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
+	
+	layout1 = go.Figure()
+		
+	layout1.update_layout(template=None,
+		                     polar_radialaxis_showticklabels=False,
+		                     polar_angularaxis_showticklabels=False,
+		                     polar_radialaxis_tickvals = [0, .33, .66],
+		                     polar_angularaxis_tickvals = [90, 180, 270],
+		                    )
+	layout1.add_traces(barpolar_plots)
+	st.write(layout1)
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
 		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
-		cols = st.columns(4)
 		attendance_values = [] 
 		for i in range(4):
 		    key = f"number_input_{i}_1"
@@ -261,15 +282,17 @@ if 'results' in locals() and 'key' in locals():
 		
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write('Inputed values')
-	
-	layout1_radius = 10
+       			st.write(f"Custom values for each attendance quadrant are 
+ \n Teamwork: {round(attendance_values[0],2)}",
+		     \n Functionality: {round(attendance_values[1],2)})
+
+	layout2_radius = 10
 	num_slices = 4
 	theta = [45, 135, 225, 315, 0]
 	polar_width = [80,80,80,80, 0]
-	attendance_vals = [i for i in attendance.values()] + [1]
+	attendance_values_adj = attendance_values + [1]
 	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-	labels = [i for i in attendance.keys()] + ['']
+	labels = ['Teamwork','Functionality','Exposure','Experience', '']
 	
 	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
 			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
