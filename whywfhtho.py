@@ -215,10 +215,7 @@ if 'results' in locals() and 'key' in locals():
 	                     polar_angularaxis_tickvals = [90, 180, 270],
 	                    )
 	layout.add_traces(barpolar_plots)
-
-
-
-	
+	st.write(layout)
 
 	# Create a selectbox widget for column selection
 	if 'Filter' in key.columns:
