@@ -238,82 +238,6 @@ if 'results' in locals() and 'key' in locals():
 		key='download-csv')
 
 	st.subheader(':blue[_Data Visualization_] ')
-	# Attendance Quadrants
-	st.subheader(':blue[_Average Attendance Quadrants_] :sunglasses:')
-
-	attendance = {}
-	for i in ['Teamwork','Functionality','Exposure','Experience']:
-		attendance[i] = totals[i].mean()
-
-	v1 = attendance["Teamwork"]
-	v2 = attendance["Functionality"]
-	v3 = attendance["Exposure"]
-	v4 = attendance["Experience"]
-
-	st.write(f"Average results for each attendance quadrant are Teamwork: {round(v1,2)}; Functionality: {round(v2,2)}; Exposure: {round(v3,2)}; Experience: {round(v4,2)}; ")
-
-	layout1_radius = 10
-	num_slices = 4
-	theta = [45, 135, 225, 315, 0]
-	polar_width = [80,80,80,80, 0]
-	attendance_vals = [i for i in attendance.values()] + [1]
-	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-	labels = [i for i in attendance.keys()] + ['']
-	
-	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
-			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
-	
-	layout1 = go.Figure()
-		
-	layout1.update_layout(template=None,
-		                     polar_radialaxis_showticklabels=False,
-		                     polar_angularaxis_showticklabels=False,
-		                     polar_radialaxis_tickvals = [0, .33, .66],
-		                     polar_angularaxis_tickvals = [90, 180, 270],
-		                    )
-	layout1.add_traces(barpolar_plots)
-	st.write(layout1)
-
-	with st.form("my_form"):
-		st.write("Customize Attendance Quadrants")
-		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
-		attendance_values = [] 
-		for i in range(4):
-		    key = f"number_input_{i}_1"
-		    a = st.number_input(attendance_q[i], key=key, step=0.05, value=0.5, max_value=1.0)
-		    attendance_values.append(a)
-
-		v5 = attendance_values[0]
-		v6 = attendance_values[1]
-		v7 = attendance_values[2]
-		v8 = attendance_values[3]
-		
-		submitted = st.form_submit_button("Submit")
-		if submitted:
-       			st.write(f"Custom values for each attendance quadrant are Teamwork: {round(v5,2)}; Functionality: {round(v6,2)}; Exposure: {round(v7,2)}; Experience: {round(v8,2)}")
-
-	layout2_radius = 10
-	num_slices = 4
-	theta = [45, 135, 225, 315, 0]
-	polar_width = [80,80,80,80, 0]
-	attendance_values_adj = attendance_values + [1]
-	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-	labels = ['Teamwork','Functionality','Exposure','Experience', '']
-	
-	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
-			  for r, t, w, n, c in zip(attendance_values_adj, theta, polar_width, labels, colors)]
-	
-	layout2 = go.Figure()
-		
-	layout2.update_layout(template=None,
-		                     polar_radialaxis_showticklabels=False,
-		                     polar_angularaxis_showticklabels=False,
-		                     polar_radialaxis_tickvals = [0, .33, .66],
-		                     polar_angularaxis_tickvals = [90, 180, 270],
-		                    )
-	layout2.add_traces(barpolar_plots)
-	st.write(layout2)
-
 	st.subheader(':blue[_Workplace Personality Scales_]')
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
@@ -392,6 +316,81 @@ if 'results' in locals() and 'key' in locals():
 	#		fig1 = px.scatter(score, x=variable1, y=variable2) 
 	#		# Histogram
 	#		fig2 = px.histogram(score, x=variable1, hover_data=score.columns)
+
+
+	# Attendance Quadrants
+	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
+	
+	attendance = {}
+	for i in ['Teamwork','Functionality','Exposure','Experience']:
+		attendance[i] = totals[i].mean()
+	
+	v1 = attendance["Teamwork"]
+	v2 = attendance["Functionality"]
+	v3 = attendance["Exposure"]
+	v4 = attendance["Experience"]
+	st.write(f"Average results for each attendance quadrant are Teamwork: {round(v1,2)}; Functionality: {round(v2,2)}; Exposure: {round(v3,2)}; Experience: {round(v4,2)}; ")
+	
+	layout1_radius = 10
+	num_slices = 4
+	theta = [45, 135, 225, 315, 0]
+	polar_width = [80,80,80,80, 0]
+	attendance_vals = [i for i in attendance.values()] + [1]
+	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
+	labels = [i for i in attendance.keys()] + ['']
+	
+	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
+			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
+	
+	layout1 = go.Figure()
+		
+	layout1.update_layout(template=None,
+			      polar_radialaxis_showticklabels=False,
+			      polar_angularaxis_showticklabels=False,
+			      polar_radialaxis_tickvals = [0, .33, .66],
+			      polar_angularaxis_tickvals = [90, 180, 270])
+	layout1.add_traces(barpolar_plots)
+	st.write(layout1)
+	
+	with st.form("my_form"):
+		st.write("Customize Attendance Quadrants")
+		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
+		attendance_values = [] 
+		for i in range(4):
+			key = f"number_input_{i}_1"
+			a = st.number_input(attendance_q[i], key=key, step=0.05, value=0.5, max_value=1.0)
+			attendance_values.append(a)
+	
+		v5 = attendance_values[0]
+		v6 = attendance_values[1]
+		v7 = attendance_values[2]
+		v8 = attendance_values[3]
+			
+		submitted = st.form_submit_button("Submit")
+		if submitted:
+	       		st.write(f"Custom values for each attendance quadrant are Teamwork: {round(v5,2)}; Functionality: {round(v6,2)}; Exposure: {round(v7,2)}; Experience: {round(v8,2)}")
+	
+			layout2_radius = 10
+			num_slices = 4
+			theta = [45, 135, 225, 315, 0]
+			polar_width = [80,80,80,80, 0]
+			attendance_values_adj = attendance_values + [1]
+			colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
+			labels = ['Teamwork','Functionality','Exposure','Experience', '']
+			
+			barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
+					  for r, t, w, n, c in zip(attendance_values_adj, theta, polar_width, labels, colors)]
+			
+			layout2 = go.Figure()
+				
+			layout2.update_layout(template=None,
+				                     polar_radialaxis_showticklabels=False,
+				                     polar_angularaxis_showticklabels=False,
+				                     polar_radialaxis_tickvals = [0, .33, .66],
+				                     polar_angularaxis_tickvals = [90, 180, 270],
+				                    )
+			layout2.add_traces(barpolar_plots)
+			st.write(layout2)
 
 else:
     placeholder.text("Please upload the necessary files")
