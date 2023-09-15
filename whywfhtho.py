@@ -245,9 +245,7 @@ if 'results' in locals() and 'key' in locals():
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
 
-	st.write(f"Average results for each attendance quadrant are 
- \n Teamwork: {round(attendance["Teamwork"],2)}",
-		     \n Functionality: {round(attendance["Functionality"],2)})
+	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(attendance["Teamwork"],2)}",\n Functionality: {round(attendance["Functionality"],2)})
 
 	layout1_radius = 10
 	num_slices = 4
@@ -282,9 +280,7 @@ if 'results' in locals() and 'key' in locals():
 		
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write(f"Custom values for each attendance quadrant are 
- \n Teamwork: {round(attendance_values[0],2)}",
-		     \n Functionality: {round(attendance_values[1],2)})
+       			st.write(f"Custom values for each attendance quadrant are \n Teamwork: {round(attendance_values[0],2)}",\n Functionality: {round(attendance_values[1],2)})
 
 	layout2_radius = 10
 	num_slices = 4
@@ -297,16 +293,16 @@ if 'results' in locals() and 'key' in locals():
 	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
 			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
 	
-	layout1 = go.Figure()
+	layout2 = go.Figure()
 		
-	layout1.update_layout(template=None,
+	layout2.update_layout(template=None,
 		                     polar_radialaxis_showticklabels=False,
 		                     polar_angularaxis_showticklabels=False,
 		                     polar_radialaxis_tickvals = [0, .33, .66],
 		                     polar_angularaxis_tickvals = [90, 180, 270],
 		                    )
-	layout1.add_traces(barpolar_plots)
-	st.write(layout1)
+	layout2.add_traces(barpolar_plots)
+	st.write(layout2)
 
 	st.subheader(':blue[_Workplace Personality Scales_]')
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
