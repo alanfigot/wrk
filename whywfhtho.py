@@ -337,7 +337,7 @@ if 'results' in locals() and 'key' in locals():
 	polar_width = [80,80,80,80, 0]
 	attendance_vals = [i for i in attendance.values()] + [1]
 	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-	labels = [i for i in attendance.keys()] + ['']
+	labels = ['Teamwork and Collaboration','Physical Functionality','Exposure and Engagement','Experience and Convenience', '']
 	
 	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
 			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
@@ -377,7 +377,7 @@ if 'results' in locals() and 'key' in locals():
 		polar_width = [80,80,80,80, 0]
 		attendance_values_adj = attendance_values + [1]
 		colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-		labels = ['Teamwork','Functionality','Exposure','Experience', '']
+		labels = ['Teamwork and Collaboration','Physical Functionality','Exposure and Engagement','Experience and Convenience', '']
 		
 		barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
 				  for r, t, w, n, c in zip(attendance_values_adj, theta, polar_width, labels, colors)]
