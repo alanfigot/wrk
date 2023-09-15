@@ -241,6 +241,13 @@ if 'results' in locals() and 'key' in locals():
 	# Attendance Quadrants
 	st.subheader(':blue[_Average Attendance Quadrants_] :sunglasses:')
 
+	attendance = {}
+	for i in ['Teamwork','Functionality','Exposure','Experience']:
+		attendance[i] = totals[i].mean()
+
+	st.write('The current values for each attendance quadrant are Teamwork: {attendance[0]}, 
+ Functionality: {attendance[1]}, Exposure: {attendance[2]}, and Experience {attendance[3]}')
+
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
 		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
@@ -256,9 +263,7 @@ if 'results' in locals() and 'key' in locals():
 		if submitted:
        			st.write('The current numbers are ', attendance_values)
 	
-	attendance = {}
-	for i in ['Teamwork','Functionality','Exposure','Experience']:
-		attendance[i] = totals[i].mean()
+	
 		
 	layout1_radius = 10
 	num_slices = 4
