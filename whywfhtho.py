@@ -240,6 +240,13 @@ if 'results' in locals() and 'key' in locals():
 	st.subheader(':blue[_Data Visualization_] ')
 	# Attendance Quadrants
 	st.subheader(':blue[_Average Attendance Quadrants_] :sunglasses:')
+
+	Teamwork = st.number_input('Insert a number')
+	Functionality = st.number_input('Insert a number')
+	Exposure = st.number_input('Insert a number')
+	Experience = st.number_input('Insert a number')
+	st.write('The current number is ', Teamwork)
+	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
