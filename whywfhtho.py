@@ -263,10 +263,10 @@ if 'results' in locals() and 'key' in locals():
 		submitted = st.form_submit_button("Submit")
 		if submitted:
        			st.write('The current numbers are ', 
-				 "Teamwork:", round(int(lists[0][0]),2), 
-				"Functionality:", round(int(lists[1][0]),2),
-				 "Exposure:", round(int(lists[2][0]),2),
-				 "Experience:", round(int(lists[3][0]),2))
+				 "Teamwork:", round(int(lists[0]),2), 
+				"Functionality:", round(int(lists[1]),2),
+				 "Exposure:", round(int(lists[2]),2),
+				 "Experience:", round(int(lists[3]),2))
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
