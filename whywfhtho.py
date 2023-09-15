@@ -301,7 +301,7 @@ if 'results' in locals() and 'key' in locals():
 	labels = ['Teamwork','Functionality','Exposure','Experience', '']
 	
 	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
-			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
+			  for r, t, w, n, c in zip(attendance_values_adj, theta, polar_width, labels, colors)]
 	
 	layout2 = go.Figure()
 		
