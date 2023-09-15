@@ -256,18 +256,15 @@ if 'results' in locals() and 'key' in locals():
 		    with c:
 		        for h in range(predict_size):
 		            key = f"number_input_{i}_{h}"
-		            a = st.number_input(exogenous_features[i], key=key)
+		            a = st.number_input(exogenous_features[i], key=key, step=0.1, value=1.0))
 		            lists[i].append(a)
                                 
 		df = pd.DataFrame(lists)
-		df = df.transpose()
-		df.columns = exogenous_features
-		st.write(df) 
 		
-		Teamwork = st.number_input('Insert a number')
+		# Teamwork = st.number_input('Insert a number')
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write("Teamwork", Teamwork)
+       			st.write(df)
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
