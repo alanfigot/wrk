@@ -329,7 +329,7 @@ if 'results' in locals() and 'key' in locals():
 	v2 = attendance["Functionality"]
 	v3 = attendance["Exposure"]
 	v4 = attendance["Experience"]
-	st.write(f"Average results are Teamwork: {round(v1,2)}; Functionality: {round(v2,2)}; Exposure: {round(v3,2)}; Experience: {round(v4,2)}; ")
+	st.write(f"Average results are Teamwork and Collaboration: {round(v1,2)}; Physical Functionality: {round(v2,2)}; Exposure and Engagement: {round(v3,2)}; Experience and Convenience: {round(v4,2)}; ")
 	
 	layout1_radius = 10
 	num_slices = 4
@@ -368,7 +368,7 @@ if 'results' in locals() and 'key' in locals():
 			
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-	       		st.write(f"Custom values are Teamwork: {round(v5,2)}; Functionality: {round(v6,2)}; Exposure: {round(v7,2)}; Experience: {round(v8,2)}")
+	       		st.write(f"Custom values are Teamwork and Collaboration: {round(v5,2)}; Physical Functionality: {round(v6,2)}; Exposure and Engagement: {round(v7,2)}; Experience and Convenience: {round(v8,2)}")
 
 	if submitted: 
 		layout2_radius = 10
