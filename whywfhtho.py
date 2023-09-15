@@ -369,7 +369,7 @@ if 'results' in locals() and 'key' in locals():
 		submitted = st.form_submit_button("Submit")
 		if submitted:
 	       		st.write(f"Custom values for each attendance quadrant are Teamwork: {round(v5,2)}; Functionality: {round(v6,2)}; Exposure: {round(v7,2)}; Experience: {round(v8,2)}")
-	
+			
 			layout2_radius = 10
 			num_slices = 4
 			theta = [45, 135, 225, 315, 0]
