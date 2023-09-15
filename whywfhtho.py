@@ -243,8 +243,8 @@ if 'results' in locals() and 'key' in locals():
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
-		exogenous_features = ['Var1', 'Var2']
-		predict_size = 4
+		exogenous_features = ['Teamwork','Functionality','Exposure','Experience']
+		predict_size = 1
 		                    
 		cols = st.columns(len(exogenous_features))
 		lists = []
