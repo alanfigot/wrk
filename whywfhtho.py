@@ -192,7 +192,7 @@ if 'results' in locals() and 'key' in locals():
 	# Attendance Quadrants
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
-		attendance[i] = score[i].mean()
+		attendance[i] = totals[i].mean()
 	
 	layout_radius = 10
 	num_slices = 4
