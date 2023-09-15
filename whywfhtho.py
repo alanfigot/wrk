@@ -243,30 +243,18 @@ if 'results' in locals() and 'key' in locals():
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
-		exogenous_features = ['Teamwork','Functionality','Exposure','Experience']
-		predict_size = 1
-		                    
-		cols = st.columns(len(exogenous_features))
-		lists = []
-		                
-		for p in range(len(exogenous_features)):
-		    lists.append([])
-		                    
-		for i, c in enumerate(cols):
-		    with c:
-		        for h in range(predict_size):
-		            key = f"number_input_{i}_{h}"
-		            a = st.number_input(exogenous_features[i], key=key, step=0.05, value=0.5, max_value=1.0)
-		            lists[i].append(a)
+		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
+		cols = st.columns(4)
+		attendance_values = [] 
+		for i in range(4):
+		    key = f"number_input_{i}_1"
+		    a = st.number_input(exogenous_features[i], key=key, step=0.05, value=0.5, max_value=1.0)
+		    attendance_values[i].append(a)
 		
 		# Teamwork = st.number_input('Insert a number')
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write('The current numbers are ', 
-				 "Teamwork:", round(int(lists[0]),2), 
-				"Functionality:", round(int(lists[1]),2),
-				 "Exposure:", round(int(lists[2]),2),
-				 "Experience:", round(int(lists[3]),2))
+       			st.write('The current numbers are ', attendance_values)
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
