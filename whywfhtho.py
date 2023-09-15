@@ -247,7 +247,7 @@ if 'results' in locals() and 'key' in locals():
 
 	teamwork = attendance['Teamwork']
 
-	st.write(f"Average results for each attendance quadrant are Teamwork: {teamwork}")
+	st.write(f"Average results for each attendance quadrant are Teamwork: round({teamwork},2)")
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
