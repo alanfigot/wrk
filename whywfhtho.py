@@ -248,7 +248,7 @@ if 'results' in locals() and 'key' in locals():
 		attendance_values = [] 
 		for i in range(4):
 		    key = f"number_input_{i}_1"
-		    a = st.number_input(exogenous_features[i], key=key, step=0.05, value=0.5, max_value=1.0)
+		    a = st.number_input(attendance_q[i], key=key, step=0.05, value=0.5, max_value=1.0)
 		    attendance_values[i].append(a)
 		
 		# Teamwork = st.number_input('Insert a number')
