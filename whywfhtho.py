@@ -250,7 +250,7 @@ if 'results' in locals() and 'key' in locals():
 	v3 = attendance["Exposure"]
 	v4 = attendance["Experience"]
 
-	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(v1,2)},\n Functionality: {round(v2,2)}")
+	st.write(f"Average results for each attendance quadrant are '\n' Teamwork: {round(v1,2)},\n Functionality: {round(v2,2)}")
 
 	layout1_radius = 10
 	num_slices = 4
