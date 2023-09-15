@@ -264,7 +264,7 @@ if 'results' in locals() and 'key' in locals():
 		# Teamwork = st.number_input('Insert a number')
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write(df)
+       			st.write('The current numbers are ', "Teamwork:" df[0))
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
