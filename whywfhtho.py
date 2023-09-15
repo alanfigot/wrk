@@ -369,7 +369,8 @@ if 'results' in locals() and 'key' in locals():
 		submitted = st.form_submit_button("Submit")
 		if submitted:
 	       		st.write(f"Custom values for each attendance quadrant are Teamwork: {round(v5,2)}; Functionality: {round(v6,2)}; Exposure: {round(v7,2)}; Experience: {round(v8,2)}")
-			
+
+	if submitted: 
 		layout2_radius = 10
 		num_slices = 4
 		theta = [45, 135, 225, 315, 0]
@@ -380,15 +381,15 @@ if 'results' in locals() and 'key' in locals():
 		
 		barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
 				  for r, t, w, n, c in zip(attendance_values_adj, theta, polar_width, labels, colors)]
-			
-		layout2 = go.Figure()
 				
-		layout2.update_layout(template=None,
-				                     polar_radialaxis_showticklabels=False,
-				                     polar_angularaxis_showticklabels=False,
-				                     polar_radialaxis_tickvals = [0, .33, .66],
-				                     polar_angularaxis_tickvals = [90, 180, 270],
-				                    )
+		layout2 = go.Figure()
+					
+		layout2.update_layout(template=None, 
+				      polar_radialaxis_showticklabels=False,
+				              polar_angularaxis_showticklabels=False,
+					                     polar_radialaxis_tickvals = [0, .33, .66],
+					                     polar_angularaxis_tickvals = [90, 180, 270],
+					                    )
 		layout2.add_traces(barpolar_plots)
 		st.write(layout2)
 
