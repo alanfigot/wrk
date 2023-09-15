@@ -245,7 +245,9 @@ if 'results' in locals() and 'key' in locals():
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
 
-	st.write("Average results for each attendance quadrant are Teamwork: {attendance["Teamwork"]}")
+	teamwork = attendance['Teamwork']
+
+	st.write("Average results for each attendance quadrant are Teamwork: {teamwork}")
 
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
