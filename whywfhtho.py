@@ -244,7 +244,9 @@ if 'results' in locals() and 'key' in locals():
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
 		Teamwork = st.number_input('Insert a number')
-		st.write('The current number is ', Teamwork)
+		submitted = st.form_submit_button("Submit")
+		if submitted:
+       			st.write("Teamwork", Teamwork)
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
