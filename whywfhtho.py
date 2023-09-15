@@ -256,7 +256,7 @@ if 'results' in locals() and 'key' in locals():
 		    with c:
 		        for h in range(predict_size):
 		            key = f"number_input_{i}_{h}"
-		            a = st.number_input(exogenous_features[i], key=key, step=0.1, value=1.0))
+		            a = st.number_input(exogenous_features[i], key=key, step=0.1, value=1.0)
 		            lists[i].append(a)
                                 
 		df = pd.DataFrame(lists)
