@@ -241,8 +241,10 @@ if 'results' in locals() and 'key' in locals():
 	# Attendance Quadrants
 	st.subheader(':blue[_Average Attendance Quadrants_] :sunglasses:')
 
-	Teamwork = st.number_input('Insert a number')
-	st.write('The current number is ', Teamwork)
+	with st.form("my_form"):
+		st.write("Customize Attendance Quadrants")
+		Teamwork = st.number_input('Insert a number')
+		st.write('The current number is ', Teamwork)
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
