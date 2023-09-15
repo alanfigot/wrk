@@ -239,7 +239,7 @@ if 'results' in locals() and 'key' in locals():
 
 	st.subheader(':blue[_Data Visualization_] ')
 	# Attendance Quadrants
-	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
+	st.subheader(':blue[_Average Attendance Quadrants_] :sunglasses:')
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
 		attendance[i] = totals[i].mean()
@@ -266,7 +266,7 @@ if 'results' in locals() and 'key' in locals():
 	layout1.add_traces(barpolar_plots)
 	st.write(layout1)
 
-	st.subheader(':blue[_Workplace Personality Scales_] :sunglasses:')
+	st.subheader(':blue[_Workplace Personality Scales_]')
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
 	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience'])) 
