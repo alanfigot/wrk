@@ -250,7 +250,7 @@ if 'results' in locals() and 'key' in locals():
 	v3 = attendance["Exposure"]
 	v4 = attendance["Experience"]
 
-	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(v1,2)}",\n Functionality: {round(v2,2)})
+	st.write(f"Average results for each attendance quadrant are \n Teamwork: {round(v1,2)},\n Functionality: {round(v2,2)}")
 
 	layout1_radius = 10
 	num_slices = 4
@@ -282,10 +282,15 @@ if 'results' in locals() and 'key' in locals():
 		    key = f"number_input_{i}_1"
 		    a = st.number_input(attendance_q[i], key=key, step=0.05, value=0.5, max_value=1.0)
 		    attendance_values.append(a)
+
+		v5 = attendance_values[0]
+		v6 = attendance_values[1]
+		v7 = attendance_values[2]
+		v8 = attendance_values[3]
 		
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write(f"Custom values for each attendance quadrant are \n Teamwork: {round(attendance_values[0],2)}",\n Functionality: {round(attendance_values[1],2)})
+       			st.write(f"Custom values for each attendance quadrant are \n Teamwork: {round(v5,2)},\n Functionality: {round(v6,2)}")
 
 	layout2_radius = 10
 	num_slices = 4
