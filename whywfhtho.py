@@ -238,7 +238,35 @@ if 'results' in locals() and 'key' in locals():
 		key='download-csv')
 
 	st.subheader(':blue[_Data Visualization_] ')
+	# Attendance Quadrants
+	st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
+	attendance = {}
+	for i in ['Teamwork','Functionality','Exposure','Experience']:
+		attendance[i] = totals[i].mean()
+		
+	layout1_radius = 10
+	num_slices = 4
+	theta = [45, 135, 225, 315, 0]
+	polar_width = [80,80,80,80, 0]
+	attendance_vals = [i for i in attendance.values()] + [1]
+	colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
+	labels = [i for i in attendance.keys()] + ['']
+	
+	barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
+			  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
+	
+	layout1 = go.Figure()
+		
+	layout1.update_layout(template=None,
+		                     polar_radialaxis_showticklabels=False,
+		                     polar_angularaxis_showticklabels=False,
+		                     polar_radialaxis_tickvals = [0, .33, .66],
+		                     polar_angularaxis_tickvals = [90, 180, 270],
+		                    )
+	layout1.add_traces(barpolar_plots)
+	st.write(layout1)
 
+	st.subheader(':blue[_Workplace Personality Scales_] :sunglasses:')
 	# graphic = st.radio("Select one of the following options:",('Scatter', 'Bar', 'Distribution', 'Box'))
 
 	variable1 = st.selectbox("Main Variable: ",list([''] + ['IC', 'SU', 'DQ', 'NP', 'LM', 'Teamwork','Functionality','Exposure','Experience'])) 
@@ -319,31 +347,3 @@ if 'results' in locals() and 'key' in locals():
 
 else:
     placeholder.text("Please upload the necessary files")
-
-# Attendance Quadrants
-attendance = {}
-for i in ['Teamwork','Functionality','Exposure','Experience']:
-	attendance[i] = totals[i].mean()
-	
-layout1_radius = 10
-num_slices = 4
-theta = [45, 135, 225, 315, 0]
-polar_width = [80,80,80,80, 0]
-attendance_vals = [i for i in attendance.values()] + [1]
-colors = ["#96B3B6", '#778F9C', '#80BBAD', '#538184', 'White']
-labels = [i for i in attendance.keys()] + ['']
-
-barpolar_plots = [go.Barpolar(r=[r], theta=[t], width=[w], name=n, marker_color=[c], opacity=.9)
-		  for r, t, w, n, c in zip(attendance_vals, theta, polar_width, labels, colors)]
-
-layout1 = go.Figure()
-	
-layout1.update_layout(template=None,
-	                     polar_radialaxis_showticklabels=False,
-	                     polar_angularaxis_showticklabels=False,
-	                     polar_radialaxis_tickvals = [0, .33, .66],
-	                     polar_angularaxis_tickvals = [90, 180, 270],
-	                    )
-layout1.add_traces(barpolar_plots)
-st.subheader(':blue[_Attendance Quadrants_] :sunglasses:')
-st.write(layout1)
