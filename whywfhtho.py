@@ -258,13 +258,11 @@ if 'results' in locals() and 'key' in locals():
 		            key = f"number_input_{i}_{h}"
 		            a = st.number_input(exogenous_features[i], key=key, step=0.05, value=0.5, max_value=1.0)
 		            lists[i].append(a)
-                                
-		df = pd.DataFrame(lists)
 		
 		# Teamwork = st.number_input('Insert a number')
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-       			st.write('The current numbers are ', "Teamwork:", df[0])
+       			st.write('The current numbers are ', "Teamwork:", lists[0])
 	
 	attendance = {}
 	for i in ['Teamwork','Functionality','Exposure','Experience']:
