@@ -329,7 +329,11 @@ if 'results' in locals() and 'key' in locals():
 	v2 = attendance["Functionality"]
 	v3 = attendance["Exposure"]
 	v4 = attendance["Experience"]
-	st.write(f"Average results are Teamwork and Collaboration: {round(v1,2)}; Physical Functionality: {round(v2,2)}; Exposure and Engagement: {round(v3,2)}; Experience and Convenience: {round(v4,2)}; ")
+	st.write("Average results are")
+	st.write(f"Teamwork and Collaboration: {round(v1,2)}")
+	st.write(f"Physical Functionality: {round(v2,2)}")
+	st.write(f"Exposure and Engagement: {round(v3,2)}")
+	st.write(f"Experience and Convenience: {round(v4,2)}")
 	
 	layout1_radius = 10
 	num_slices = 4
