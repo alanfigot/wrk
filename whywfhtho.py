@@ -372,7 +372,11 @@ if 'results' in locals() and 'key' in locals():
 			
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-	       		st.write(f"Custom values are Teamwork and Collaboration: {round(v5,2)}; Physical Functionality: {round(v6,2)}; Exposure and Engagement: {round(v7,2)}; Experience and Convenience: {round(v8,2)}")
+	       		st.write("Custom values are ")
+			st.write(f"Teamwork and Collaboration: {round(v5,2)}")
+			st.write(f"Physical Functionality: {round(v6,2)}")
+			st.write(f"Exposure and Engagement: {round(v7,2)}")
+			st.write(f"Experience and Convenience: {round(v8,2)}")
 
 	if submitted: 
 		layout2_radius = 10
