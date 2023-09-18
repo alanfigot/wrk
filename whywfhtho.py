@@ -372,7 +372,7 @@ if 'results' in locals() and 'key' in locals():
 			
 		submitted = st.form_submit_button("Submit")
 		if submitted:
-	       		st.write("Custom values are ")
+			st.write("Custom values are ")
 			st.write(f"Teamwork and Collaboration: {round(v5,2)}")
 			st.write(f"Physical Functionality: {round(v6,2)}")
 			st.write(f"Exposure and Engagement: {round(v7,2)}")
