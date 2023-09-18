@@ -358,7 +358,7 @@ if 'results' in locals() and 'key' in locals():
 	
 	with st.form("my_form"):
 		st.write("Customize Attendance Quadrants")
-		attendance_q = ['Teamwork','Functionality','Exposure','Experience']
+		attendance_q = ['Teamwork and Collaboration','Physical Functionality','Exposure and Engagement','Experience and Convenience']
 		attendance_values = [] 
 		for i in range(4):
 			key = f"number_input_{i}_1"
